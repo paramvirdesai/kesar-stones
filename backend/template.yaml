@@ -1,0 +1,43 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Marble granite lead capture backend
+
+Resources:
+  LeadsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: marble-granite-leads
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: leadId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: leadId
+          KeyType: HASH
+
+  LeadFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: marble-granite-lead
+      Runtime: nodejs18.x
+      Handler: index.handler
+      CodeUri: lambda/lead/
+      Timeout: 10
+      MemorySize: 256
+      Environment:
+        Variables:
+          LEADS_TABLE: !Ref LeadsTable
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref LeadsTable
+      Events:
+        LeadApi:
+          Type: Api
+          Properties:
+            Path: /lead
+            Method: post
+        LeadOptionsApi:
+          Type: Api
+          Properties:
+            Path: /lead
+            Method: options

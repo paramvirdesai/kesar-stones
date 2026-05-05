@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", "Segoe UI", sans-serif;
+  color: #1f1a17;
+  background: #f5f2ef;
+}
+
+.section-shell {
+  @apply mx-auto w-full max-w-6xl px-4 py-14 md:px-6;
+}
+
+.btn-premium {
+  @apply inline-flex items-center rounded-xl bg-white px-6 py-3 font-semibold text-stonebrand-900 transition duration-300 hover:scale-[1.03] hover:shadow-2xl hover:shadow-white/20;
+}
+
+.btn-ghost {
+  @apply inline-flex items-center rounded-xl border border-stonebrand-500 px-6 py-3 font-semibold text-stonebrand-700 transition duration-300 hover:scale-[1.02] hover:bg-stonebrand-900 hover:text-white;
+}
+
+.reveal-base {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.75s ease forwards;
+}
+
+.fade-up:nth-child(1) { animation-delay: 120ms; }
+.fade-up:nth-child(2) { animation-delay: 220ms; }
+.fade-up:nth-child(3) { animation-delay: 320ms; }
+.fade-up:nth-child(4) { animation-delay: 420ms; }
+
+.page-enter {
+  animation: pageIn 0.4s ease;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.scroll-indicator span {
+  width: 24px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: 999px;
+  display: block;
+  position: relative;
+}
+
+.scroll-indicator span::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 8px;
+  width: 4px;
+  height: 8px;
+  border-radius: 999px;
+  background: #fff;
+  transform: translateX(-50%);
+  animation: scrollDot 1.6s infinite;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scrollDot {
+  0% { opacity: 0; transform: translate(-50%, 0); }
+  30% { opacity: 1; }
+  100% { opacity: 0; transform: translate(-50%, 14px); }
+}
