@@ -2,97 +2,137 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
-}
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
 
-body {
-  font-family: "Inter", "Segoe UI", sans-serif;
-  color: #1f1a17;
-  background: #f5f2ef;
-}
+  body {
+    @apply bg-slate-950 font-sans text-zinc-300;
+  }
 
-.section-shell {
-  @apply mx-auto w-full max-w-6xl px-4 py-14 md:px-6;
-}
-
-.btn-premium {
-  @apply inline-flex items-center rounded-xl bg-white px-6 py-3 font-semibold text-stonebrand-900 transition duration-300 hover:scale-[1.03] hover:shadow-2xl hover:shadow-white/20;
-}
-
-.btn-ghost {
-  @apply inline-flex items-center rounded-xl border border-stonebrand-500 px-6 py-3 font-semibold text-stonebrand-700 transition duration-300 hover:scale-[1.02] hover:bg-stonebrand-900 hover:text-white;
-}
-
-.reveal-base {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.65s ease, transform 0.65s ease;
-}
-
-.revealed {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.fade-up {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUp 0.75s ease forwards;
-}
-
-.fade-up:nth-child(1) { animation-delay: 120ms; }
-.fade-up:nth-child(2) { animation-delay: 220ms; }
-.fade-up:nth-child(3) { animation-delay: 320ms; }
-.fade-up:nth-child(4) { animation-delay: 420ms; }
-
-.page-enter {
-  animation: pageIn 0.4s ease;
-}
-
-.scroll-indicator {
-  position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.scroll-indicator span {
-  width: 24px;
-  height: 40px;
-  border: 1px solid rgba(255,255,255,0.6);
-  border-radius: 999px;
-  display: block;
-  position: relative;
-}
-
-.scroll-indicator span::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 8px;
-  width: 4px;
-  height: 8px;
-  border-radius: 999px;
-  background: #fff;
-  transform: translateX(-50%);
-  animation: scrollDot 1.6s infinite;
-}
-
-@keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  ::selection {
+    @apply bg-zinc-200 text-slate-950;
   }
 }
 
-@keyframes pageIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+@layer components {
+  .corp-container {
+    @apply mx-auto w-full max-w-7xl px-5 md:px-8;
+  }
 
-@keyframes scrollDot {
-  0% { opacity: 0; transform: translate(-50%, 0); }
-  30% { opacity: 1; }
-  100% { opacity: 0; transform: translate(-50%, 14px); }
+  .corp-section {
+    @apply py-20 md:py-28;
+  }
+
+  .premium-dark {
+    @apply bg-gradient-to-br from-slate-950 via-zinc-900 to-neutral-950;
+  }
+
+  .premium-dark-alt {
+    @apply bg-gradient-to-b from-zinc-950 via-slate-900/95 to-slate-950;
+  }
+
+  .glass-panel {
+    @apply border border-white/10 bg-zinc-900/40 shadow-glass backdrop-blur-md;
+  }
+
+  .glass-panel-hover {
+    @apply transition-all duration-500 ease-out hover:border-white/15 hover:bg-zinc-900/55 hover:shadow-glass-hover;
+  }
+
+  .corp-eyebrow {
+    @apply text-[11px] font-semibold uppercase tracking-[0.28em] text-zinc-400;
+  }
+
+  .corp-eyebrow-light {
+    @apply text-[11px] font-semibold uppercase tracking-[0.28em] text-zinc-500;
+  }
+
+  .heading-serif {
+    @apply font-serif text-4xl font-light leading-tight tracking-tight text-white md:text-5xl lg:text-6xl;
+  }
+
+  .heading-display {
+    @apply font-display text-3xl font-semibold tracking-tight text-white md:text-4xl;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center border border-white/20 bg-white px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-slate-950 transition-all duration-300 hover:bg-zinc-100 hover:shadow-lg hover:shadow-white/10;
+  }
+
+  .btn-ghost-glass {
+    @apply inline-flex items-center justify-center border border-white/25 bg-white/5 px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-white backdrop-blur-sm transition-all duration-300 hover:border-white/40 hover:bg-white/10;
+  }
+
+  .material-card,
+  .showcase-card {
+    @apply relative overflow-hidden rounded-sm border border-white/10 bg-zinc-900/30 shadow-glass backdrop-blur-md transition-all duration-500 ease-out hover:scale-[1.01] hover:border-white/15 hover:shadow-2xl hover:shadow-white/5;
+  }
+
+  .btn-cta-gold {
+    @apply inline-flex items-center justify-center bg-amber-100 px-7 py-3.5 text-xs font-medium uppercase tracking-wide text-stone-900 transition-all duration-300 hover:bg-white hover:shadow-lg hover:shadow-amber-100/10;
+  }
+
+  .cert-badge-prominent {
+    @apply glass-panel rounded-sm border border-amber-100/20 bg-zinc-900/50 p-8 shadow-glass backdrop-blur-md transition-all duration-500 hover:scale-[1.01] hover:border-amber-100/35 hover:shadow-2xl hover:shadow-amber-100/5 hover:ring-1 hover:ring-amber-100/25;
+  }
+
+  .workflow-step-active {
+    @apply ring-1 ring-zinc-400/30;
+  }
+
+  .cert-badge {
+    @apply glass-panel glass-panel-hover rounded-sm p-8 transition-all duration-500 hover:ring-1 hover:ring-zinc-400/30;
+  }
+
+  .site-header--glass {
+    @apply border-b border-white/10 bg-zinc-950/50 shadow-glass backdrop-blur-xl;
+  }
+
+  .site-header--glass-solid {
+    @apply border-b border-white/10 bg-zinc-950/80 shadow-glass backdrop-blur-xl;
+  }
+
+  .nav-link {
+    @apply text-xs font-medium uppercase tracking-[0.15em] transition-colors duration-300;
+  }
+
+  .nav-link--light {
+    @apply text-zinc-400 hover:text-white;
+  }
+
+  .nav-link--active.nav-link--light {
+    @apply text-white;
+  }
+
+  /* Floating label fields */
+  .float-field {
+    @apply relative;
+  }
+
+  .float-input {
+    @apply w-full rounded-sm border border-white/10 bg-zinc-900/50 px-4 pb-2.5 pt-6 text-sm text-zinc-100 placeholder-transparent backdrop-blur-sm transition-colors duration-300 focus:border-zinc-400 focus:bg-zinc-900/70 focus:outline-none focus:ring-1 focus:ring-zinc-400/50;
+  }
+
+  .float-input.ng-touched.ng-invalid {
+    @apply border-rose-400/40 focus:border-rose-400/50 focus:ring-rose-400/20;
+  }
+
+  .float-label {
+    @apply pointer-events-none absolute left-4 top-4 text-xs font-medium uppercase tracking-wider text-zinc-500 transition-all duration-300 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-[10px] peer-focus:text-zinc-400 peer-[:not(:placeholder-shown)]:top-2 peer-[:not(:placeholder-shown)]:text-[10px];
+  }
+
+  .float-select {
+    @apply w-full appearance-none rounded-sm border border-white/10 bg-zinc-900/50 px-4 py-3.5 text-sm text-zinc-100 backdrop-blur-sm transition-colors duration-300 focus:border-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400/50;
+  }
+
+  .float-select.ng-touched.ng-invalid {
+    @apply border-rose-400/40;
+  }
+
+  .workflow-line {
+    @apply absolute left-0 right-0 top-8 hidden h-px bg-gradient-to-r from-transparent via-zinc-600 to-transparent md:block;
+  }
 }

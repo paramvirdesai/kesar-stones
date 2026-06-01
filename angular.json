@@ -16,14 +16,27 @@
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": [
+              "src/favicon.ico",
+              {
+                "glob": "**/*",
+                "input": "public",
+                "output": "/"
+              }
+            ],
             "styles": ["src/styles.css"]
           },
           "configurations": {
             "production": {
               "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false
+              "sourceMap": false,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.production.ts"
+                }
+              ]
             },
             "development": {
               "optimization": false,
@@ -34,6 +47,9 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "poll": 2000
+          },
           "configurations": {
             "production": {
               "buildTarget": "marble-granite-site:build:production"
@@ -46,5 +62,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "c3aa76cc-88db-40d1-860b-0ab027e4c5c9"
   }
 }

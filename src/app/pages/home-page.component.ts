@@ -1,90 +1,150 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { LeadFormComponent } from '../components/lead-form.component';
-import { TestimonialsComponent } from '../components/testimonials.component';
-import { CommonModule } from '@angular/common';
-import { RevealOnScrollDirective } from '../directives/reveal-on-scroll.directive';
+import { finalize } from 'rxjs';
+import { SITE_ASSETS } from '../data/site-assets';
+import {
+  HERO_HEADLINE,
+  LUXURY_APPLICATION_CARDS,
+  RAW_HOVER_OVERLAY,
+  RAW_INVENTORY_CARDS,
+  STORY_MOSAIC
+} from '../data/home-page.data';
+import { MATERIAL_OPTIONS } from '../data/products.data';
+import { LeadApiService } from '../services/lead-api.service';
+
+export interface WorkflowStep {
+  step: number;
+  title: string;
+  description: string;
+  location: string;
+}
+
+export interface ComplianceBadge {
+  code: string;
+  title: string;
+  subtitle: string;
+  value?: string;
+  prominent?: boolean;
+}
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [RouterLink, LeadFormComponent, TestimonialsComponent, CommonModule, RevealOnScrollDirective],
-  template: `
-    <section class="relative flex min-h-screen items-center overflow-hidden">
-      <img
-        src="https://images.unsplash.com/photo-1616137466211-f939a420be84?auto=format&fit=crop&w=1800&q=80"
-        alt="Premium marble surface"
-        class="absolute inset-0 h-full w-full object-cover"
-        loading="eager"
-      />
-      <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/80"></div>
-      <div class="relative z-10 mx-auto max-w-6xl px-6 text-white">
-        <p class="fade-up text-sm uppercase tracking-[0.35em] text-stonebrand-300">Luxury Stone Studio</p>
-        <h1 class="fade-up mt-4 max-w-4xl text-5xl font-semibold leading-tight md:text-7xl">
-          Iconic Marble. Timeless Granite. Crafted for Signature Spaces.
-        </h1>
-        <p class="fade-up mt-6 max-w-2xl text-lg text-stonebrand-100">
-          We source and finish statement stones for residences, hotels, and flagship projects.
-        </p>
-        <div class="fade-up mt-8 flex flex-wrap gap-4">
-          <a routerLink="/products" class="btn-premium">Explore Collections</a>
-          <a routerLink="/contact" class="btn-ghost">Book Design Consultation</a>
-        </div>
-      </div>
-      <div class="scroll-indicator">
-        <span></span>
-      </div>
-    </section>
-
-    <section class="section-shell space-y-14">
-      <article class="grid gap-8 md:grid-cols-2 md:items-center" appRevealOnScroll>
-        <h2 class="text-4xl font-semibold text-stonebrand-900">From quarry selection to perfect installation.</h2>
-        <p class="text-lg text-stonebrand-600">
-          Every slab is evaluated for veining, structure, and finish response. We deliver a fully managed sourcing-to-installation workflow.
-        </p>
-      </article>
-      <article class="grid gap-8 md:grid-cols-2 md:items-center" appRevealOnScroll [revealDelay]="80">
-        <p class="text-lg text-stonebrand-600">
-          Our project engineers and interior consultants collaborate to create seamless countertops, feature walls, and statement lobbies.
-        </p>
-        <h2 class="text-4xl font-semibold text-stonebrand-900">A bespoke process with global sourcing depth.</h2>
-      </article>
-    </section>
-
-    <section class="section-shell" appRevealOnScroll>
-      <h2 class="text-3xl font-semibold text-stonebrand-900">How It Works</h2>
-      <div class="mt-8 grid gap-6 md:grid-cols-3">
-        <div *ngFor="let step of steps; let i = index" class="rounded-2xl border border-stonebrand-300 bg-white p-6 shadow-sm transition duration-500 hover:-translate-y-1 hover:shadow-xl">
-          <p class="text-sm font-semibold tracking-wide text-stonebrand-500">STEP {{ i + 1 }}</p>
-          <h3 class="mt-2 text-xl font-semibold">{{ step.title }}</h3>
-          <p class="mt-2 text-stonebrand-600">{{ step.description }}</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-shell" appRevealOnScroll>
-      <div class="grid gap-6 rounded-3xl bg-black p-8 text-white md:grid-cols-4">
-        <div *ngFor="let stat of stats">
-          <p class="text-4xl font-semibold">{{ stat.value }}</p>
-          <p class="mt-2 text-sm uppercase tracking-wider text-stonebrand-300">{{ stat.label }}</p>
-        </div>
-      </div>
-    </section>
-    <app-testimonials />
-    <app-lead-form />
-  `
+  imports: [RouterLink, ReactiveFormsModule],
+  templateUrl: './home-page.component.html'
 })
 export class HomePageComponent {
-  steps = [
-    { title: 'Design Brief', description: 'We align on moodboards, palettes, and usage context.' },
-    { title: 'Stone Curation', description: 'Shortlisted slabs are matched to your design intent.' },
-    { title: 'Delivery & Finish', description: 'Precision fabrication and white-glove installation.' }
+  private readonly fb = inject(FormBuilder);
+  private readonly leadApi = inject(LeadApiService);
+
+  readonly assets = SITE_ASSETS;
+  readonly heroHeadline = HERO_HEADLINE;
+  readonly storyMosaic = STORY_MOSAIC;
+  readonly luxuryCards = LUXURY_APPLICATION_CARDS;
+  readonly rawInventoryCards = RAW_INVENTORY_CARDS;
+  readonly rawHoverOverlay = RAW_HOVER_OVERLAY;
+  readonly materialOptions = MATERIAL_OPTIONS;
+
+  activeWorkflowStep = 0;
+  formSubmitted = false;
+  formLoading = false;
+  formStatus: 'idle' | 'success' | 'error' = 'idle';
+
+  readonly gstNumber = 'XXAAAAA0000A1Z5';
+  readonly iecNumber = 'XXXXXXXXXX';
+
+  readonly storyParagraphs = [
+    'Iconic Stones owns and operates quarry assets in Rajsamand, Rajasthan — supplying granite, marble, quartzite, and engineered programs to distributors and developers across North America, China, and the Middle East.',
+    'We are processors, not brokers. From block extraction and gang-saw processing to resin treatment, QA inspection, and ISPM-15 export crating, every container is documented for B2B procurement teams.',
+    'Our asymmetric supply model pairs finished architectural applications with transparent raw bundle inventory — built for commercial importers who need both specification confidence and wholesale volume.'
   ];
 
-  stats = [
-    { value: '2,000+', label: 'Premium slabs sourced' },
-    { value: '420+', label: 'Projects delivered' },
-    { value: '18', label: 'Countries networked' },
-    { value: '98%', label: 'Client retention' }
+  readonly workflow: WorkflowStep[] = [
+    {
+      step: 1,
+      title: 'Sourcing · Rajsamand',
+      description: 'Precision quarrying, vein mapping, and block grading at our Rajasthan operations.',
+      location: 'Rajsamand District, India'
+    },
+    {
+      step: 2,
+      title: 'Quality Assurance',
+      description: 'Thickness calibration, finish control, resin treatment, and pre-export inspection.',
+      location: 'Processing & QA Facilities'
+    },
+    {
+      step: 3,
+      title: 'Global Delivery',
+      description: 'Port programs to USA, China, UAE, and expanding North American distributor networks.',
+      location: 'USA · China · UAE · Canada'
+    }
   ];
+
+  readonly complianceBadges: ComplianceBadge[] = [
+    {
+      code: 'GST',
+      title: 'GST Registration',
+      subtitle: 'Government of India',
+      value: this.gstNumber,
+      prominent: true
+    },
+    {
+      code: 'IEC',
+      title: 'Export-Import Code',
+      subtitle: 'DGFT Authorized',
+      value: this.iecNumber,
+      prominent: true
+    },
+    {
+      code: 'QA',
+      title: 'Quality Assurance',
+      subtitle: 'Pre-Export Inspection'
+    },
+    {
+      code: 'EXP',
+      title: 'Export Verified',
+      subtitle: 'International Trade Ready'
+    }
+  ];
+
+  readonly inquiryForm: FormGroup = this.fb.group({
+    name: ['', [Validators.required, Validators.minLength(2)]],
+    email: ['', [Validators.required, Validators.email]],
+    destinationPort: ['', [Validators.required, Validators.minLength(2)]],
+    materialInterest: ['', Validators.required],
+    message: ['', [Validators.required, Validators.minLength(10)]]
+  });
+
+  setActiveWorkflow(step: number): void {
+    this.activeWorkflowStep = step;
+  }
+
+  submitInquiry(): void {
+    this.formSubmitted = true;
+    this.formStatus = 'idle';
+    if (this.inquiryForm.invalid) return;
+
+    this.formLoading = true;
+    const v = this.inquiryForm.getRawValue();
+    this.leadApi
+      .submitB2BInquiry({
+        name: v.name!,
+        email: v.email!,
+        company: '—',
+        destinationPort: v.destinationPort!,
+        materialInterest: v.materialInterest!,
+        volume: '—',
+        message: v.message!
+      })
+      .pipe(finalize(() => (this.formLoading = false)))
+      .subscribe({
+        next: () => {
+          this.formStatus = 'success';
+          this.inquiryForm.reset();
+          this.formSubmitted = false;
+        },
+        error: () => (this.formStatus = 'error')
+      });
+  }
 }

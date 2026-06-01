@@ -55,3 +55,4 @@ export const handler = async (event) => {
     return response(500, { message: "Internal server error." });
   }
 };
+

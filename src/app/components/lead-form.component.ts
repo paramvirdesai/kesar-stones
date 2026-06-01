@@ -3,29 +3,53 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { finalize } from 'rxjs';
 import { LeadApiService } from '../services/lead-api.service';
-import { RevealOnScrollDirective } from '../directives/reveal-on-scroll.directive';
 
 @Component({
   selector: 'app-lead-form',
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf, RevealOnScrollDirective],
+  imports: [ReactiveFormsModule, NgIf],
   template: `
-    <section class="section-shell" appRevealOnScroll>
-      <div class="rounded-3xl bg-stonebrand-900 p-8 text-white shadow-2xl md:p-10">
-        <h2 class="text-3xl font-semibold">Request a Private Consultation</h2>
-        <form class="mt-6 grid gap-4 md:grid-cols-2" [formGroup]="leadForm" (ngSubmit)="submit()">
-          <input class="rounded-xl px-4 py-3 text-stonebrand-900" placeholder="Full Name" formControlName="name" />
-          <input class="rounded-xl px-4 py-3 text-stonebrand-900" placeholder="Company" formControlName="company" />
-          <input class="rounded-lg px-3 py-3 text-stonebrand-900 md:col-span-2" placeholder="Email" formControlName="email" />
-          <textarea class="rounded-xl px-4 py-3 text-stonebrand-900 md:col-span-2" rows="4" placeholder="Project details" formControlName="message"></textarea>
-          <div class="md:col-span-2">
-            <button [disabled]="loading" class="inline-flex items-center gap-2 rounded-xl bg-stonebrand-300 px-6 py-3 font-semibold text-stonebrand-900 transition hover:scale-[1.02] hover:shadow-lg disabled:opacity-60" type="submit">
-              <span *ngIf="loading" class="h-4 w-4 animate-spin rounded-full border-2 border-stonebrand-700 border-t-transparent"></span>
-              {{ loading ? 'Submitting...' : 'Submit Lead' }}
+    <section class="cin-section bg-stonebrand-950 text-stonebrand-100">
+      <div class="cin-container grid gap-16 lg:grid-cols-2 lg:gap-24">
+        <div>
+          <p class="cin-eyebrow text-stonebrand-400">Private Consultation</p>
+          <h2 class="font-display mt-6 text-4xl font-light leading-tight text-stonebrand-50 md:text-5xl">
+            Begin a material<br />conversation.
+          </h2>
+          <p class="mt-8 max-w-md text-sm leading-relaxed text-stonebrand-400">
+            Share your project vision. Our atelier team will respond with curated selections,
+            samples, and a tailored sourcing approach.
+          </p>
+        </div>
+
+        <form class="consult-panel bg-stonebrand-900/40 border-stonebrand-700" [formGroup]="leadForm" (ngSubmit)="submit()">
+          <input class="consult-input text-stonebrand-100 placeholder:text-stonebrand-500" placeholder="Name" formControlName="name" />
+          <input class="consult-input text-stonebrand-100 placeholder:text-stonebrand-500" placeholder="Studio / Company" formControlName="company" />
+          <input class="consult-input text-stonebrand-100 placeholder:text-stonebrand-500" placeholder="Email" formControlName="email" />
+          <textarea
+            class="consult-input min-h-[120px] resize-none text-stonebrand-100 placeholder:text-stonebrand-500"
+            rows="4"
+            placeholder="Project narrative"
+            formControlName="message"
+          ></textarea>
+          <div class="mt-10">
+            <button
+              [disabled]="loading"
+              class="btn-cinema-light w-full justify-center disabled:opacity-50"
+              type="submit"
+            >
+              <span *ngIf="loading" class="mr-2 inline-block h-3 w-3 animate-spin rounded-full border border-white/30 border-t-white"></span>
+              {{ loading ? 'Sending' : 'Request Consultation' }}
             </button>
-            <p *ngIf="submitted && leadForm.invalid" class="mt-2 text-sm text-red-200">Please complete required fields with valid details.</p>
-            <p *ngIf="status === 'success'" class="mt-2 text-sm text-green-200">Lead submitted. Our concierge will contact you shortly.</p>
-            <p *ngIf="status === 'error'" class="mt-2 text-sm text-red-200">Submission failed. Please try again in a moment.</p>
+            <p *ngIf="submitted && leadForm.invalid" class="mt-4 text-xs text-red-300/90">
+              Please complete all fields with valid details.
+            </p>
+            <p *ngIf="status === 'success'" class="mt-4 text-xs text-stonebrand-300">
+              Thank you. Our atelier will be in touch shortly.
+            </p>
+            <p *ngIf="status === 'error'" class="mt-4 text-xs text-red-300/90">
+              Unable to send. Please try again.
+            </p>
           </div>
         </form>
       </div>
@@ -51,9 +75,8 @@ export class LeadFormComponent {
   submit(): void {
     this.submitted = true;
     this.status = 'idle';
-    if (this.leadForm.invalid) {
-      return;
-    }
+    if (this.leadForm.invalid) return;
+
     this.loading = true;
     this.leadApi
       .submitLead(this.leadForm.getRawValue() as { name: string; email: string; company: string; message: string })
@@ -64,9 +87,7 @@ export class LeadFormComponent {
           this.leadForm.reset();
           this.submitted = false;
         },
-        error: () => {
-          this.status = 'error';
-        }
+        error: () => (this.status = 'error')
       });
   }
 }

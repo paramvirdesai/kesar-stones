@@ -10,6 +10,16 @@ export interface LeadPayload {
   message: string;
 }
 
+export interface B2BInquiryPayload {
+  name: string;
+  email: string;
+  company: string;
+  destinationPort: string;
+  materialInterest: string;
+  volume: string;
+  message: string;
+}
+
 @Injectable({ providedIn: 'root' })
 export class LeadApiService {
   private readonly endpoint = `${environment.apiBaseUrl}/lead`;
@@ -18,5 +28,22 @@ export class LeadApiService {
 
   submitLead(payload: LeadPayload): Observable<{ message: string }> {
     return this.http.post<{ message: string }>(this.endpoint, payload);
+  }
+
+  submitB2BInquiry(payload: B2BInquiryPayload): Observable<{ message: string }> {
+    const lead: LeadPayload = {
+      name: payload.name,
+      email: payload.email,
+      company: payload.company,
+      message: [
+        `B2B Export Inquiry`,
+        `Destination Port / Market: ${payload.destinationPort}`,
+        `Material Interest: ${payload.materialInterest}`,
+        `Estimated Volume: ${payload.volume}`,
+        ``,
+        payload.message
+      ].join('\n')
+    };
+    return this.submitLead(lead);
   }
 }

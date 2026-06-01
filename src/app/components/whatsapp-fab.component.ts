@@ -5,13 +5,13 @@ import { Component } from '@angular/core';
   standalone: true,
   template: `
     <a
-      href="https://wa.me/919876543210?text=Hi%20I%20want%20a%20luxury%20stone%20consultation"
+      href="https://wa.me/919876543210?text=Iconic%20Stones%20B2B%20Export%20Inquiry"
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Chat on WhatsApp"
-      class="fixed bottom-5 right-5 z-50 inline-flex h-14 w-14 items-center justify-center rounded-full bg-green-500 text-2xl text-white shadow-lg shadow-green-700/30 transition duration-300 hover:scale-110 hover:shadow-green-500/50"
+      aria-label="WhatsApp export desk"
+      class="fixed bottom-6 right-6 z-50 flex h-12 items-center gap-2 border border-corporate-700 bg-white px-4 text-xs font-semibold uppercase tracking-wider text-corporate-900 shadow-lg transition hover:bg-corporate-900 hover:text-white"
     >
-      <span>W</span>
+      WhatsApp
     </a>
   `
 })

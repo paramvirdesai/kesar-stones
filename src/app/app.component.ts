@@ -10,7 +10,7 @@ import { WhatsappFabComponent } from './components/whatsapp-fab.component';
   imports: [RouterOutlet, NavbarComponent, FooterComponent, WhatsappFabComponent],
   template: `
     <app-navbar />
-    <main class="page-enter min-h-screen pt-16">
+    <main class="min-h-screen">
       <router-outlet />
     </main>
     <app-footer />
