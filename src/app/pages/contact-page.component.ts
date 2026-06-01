@@ -10,52 +10,52 @@ import { MATERIAL_OPTIONS } from '../data/products.data';
   standalone: true,
   imports: [ReactiveFormsModule],
   template: `
-    <section class="premium-dark border-b border-white/5 pt-28">
+    <section class="patagonia-bg border-b border-patagonia-border pt-28">
       <div class="corp-container py-16">
         <p class="corp-eyebrow">B2B Export Desk</p>
         <h1 class="heading-serif mt-4">Request a quote</h1>
-        <p class="mt-6 max-w-2xl text-zinc-400">
+        <p class="body-text mt-6 max-w-2xl">
           For distributors, developers, and procurement teams — submit your port, material, and volume requirements.
         </p>
       </div>
     </section>
 
-    <section class="corp-section premium-dark-alt">
+    <section class="corp-section patagonia-bg-alt">
       <div class="corp-container grid gap-12 lg:grid-cols-5">
         <aside class="lg:col-span-2">
           <h2 class="heading-display text-2xl">Export desk contact</h2>
-          <p class="mt-6 text-sm leading-relaxed text-zinc-400">
+          <p class="body-text mt-6">
             Response within 1–2 business days for qualified B2B inquiries. Include destination port and estimated
             container volume for fastest quotation.
           </p>
-          <div class="glass-panel mt-8 space-y-6 p-8 text-sm">
+          <div class="editorial-card mt-8 space-y-6 p-8 text-sm">
             <div>
               <p class="corp-eyebrow">Email</p>
-              <a href="mailto:info@theexoticstones.com" class="mt-2 block font-semibold text-white hover:text-zinc-300">
+              <a href="mailto:info@theexoticstones.com" class="text-email-accent mt-2 block text-lg">
                 info&#64;theexoticstones.com
               </a>
             </div>
-            <div class="border-t border-white/10 pt-6">
+            <div class="border-t border-patagonia-border pt-6">
               <p class="corp-eyebrow">Headquarters</p>
-              <p class="mt-2 text-zinc-300">United States</p>
+              <p class="mt-2 text-patagonia-taupe">United States</p>
             </div>
-            <div class="border-t border-white/10 pt-6">
+            <div class="border-t border-patagonia-border pt-6">
               <p class="corp-eyebrow">Quarry Operations</p>
-              <p class="mt-2 text-zinc-300">Rajsamand District, Rajasthan, India</p>
+              <p class="mt-2 text-patagonia-taupe">Rajsamand District, Rajasthan, India</p>
             </div>
-            <div class="border-t border-white/10 pt-6">
+            <div class="border-t border-patagonia-border pt-6">
               <p class="corp-eyebrow">Active Export Markets</p>
-              <p class="mt-2 text-zinc-300">USA · Canada · China · UAE · Middle East</p>
+              <p class="mt-2 text-patagonia-taupe">USA · Canada · China · UAE · Middle East</p>
             </div>
           </div>
         </aside>
 
         <form
-          class="glass-panel lg:col-span-3 p-8 md:p-10"
+          class="editorial-card lg:col-span-3 p-8 md:p-10"
           [formGroup]="inquiryForm"
           (ngSubmit)="send()"
         >
-          <h2 class="font-display text-lg font-bold text-white">B2B inquiry form</h2>
+          <h2 class="font-display text-lg font-bold text-patagonia-chocolate">B2B inquiry form</h2>
           <div class="mt-8 grid gap-6 md:grid-cols-2">
             <div class="float-field">
               <input id="name" class="peer float-input" formControlName="name" placeholder=" " autocomplete="name" />
@@ -103,22 +103,22 @@ import { MATERIAL_OPTIONS } from '../data/products.data';
             </div>
           </div>
 
-          <button [disabled]="loading" class="btn-cta-gold mt-8 w-full disabled:opacity-50" type="submit">
+          <button [disabled]="loading" class="btn-cta-copper mt-8 w-full disabled:opacity-50" type="submit">
             {{ loading ? 'Submitting Inquiry...' : 'Submit B2B Inquiry' }}
           </button>
 
           @if (submitted && inquiryForm.invalid) {
-            <p class="mt-4 text-sm text-rose-300/80">
+            <p class="mt-4 text-sm text-red-600/80">
               Please complete all required fields with valid business information.
             </p>
           }
           @if (status === 'success') {
-            <p class="mt-4 text-sm text-emerald-400/90">
+            <p class="mt-4 text-sm text-emerald-700/90">
               Inquiry received. Our export desk will contact you shortly.
             </p>
           }
           @if (status === 'error') {
-            <p class="mt-4 text-sm text-rose-300/80">
+            <p class="mt-4 text-sm text-red-600/80">
               Submission failed. Email info&#64;theexoticstones.com or retry shortly.
             </p>
           }

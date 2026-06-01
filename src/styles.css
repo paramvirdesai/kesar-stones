@@ -9,11 +9,11 @@
   }
 
   body {
-    @apply bg-slate-950 font-sans text-zinc-300;
+    @apply bg-patagonia-cream font-sans text-patagonia-taupe;
   }
 
   ::selection {
-    @apply bg-zinc-200 text-slate-950;
+    @apply bg-patagonia-copper/30 text-patagonia-chocolate;
   }
 }
 
@@ -26,73 +26,81 @@
     @apply py-20 md:py-28;
   }
 
+  /* Patagonia editorial surfaces */
+  .patagonia-bg,
   .premium-dark {
-    @apply bg-gradient-to-br from-slate-950 via-zinc-900 to-neutral-950;
+    @apply bg-patagonia-cream;
   }
 
+  .patagonia-bg-alt,
   .premium-dark-alt {
-    @apply bg-gradient-to-b from-zinc-950 via-slate-900/95 to-slate-950;
+    @apply bg-patagonia-ivory;
   }
 
+  .editorial-card,
   .glass-panel {
-    @apply border border-white/10 bg-zinc-900/40 shadow-glass backdrop-blur-md;
+    @apply rounded-sm border border-patagonia-border bg-white/80 shadow-editorial backdrop-blur-md;
   }
 
+  .editorial-card-hover,
   .glass-panel-hover {
-    @apply transition-all duration-500 ease-out hover:border-white/15 hover:bg-zinc-900/55 hover:shadow-glass-hover;
+    @apply transition-all duration-500 ease-out hover:border-patagonia-copper/20 hover:bg-patagonia-white hover:shadow-editorial-hover;
   }
 
   .corp-eyebrow {
-    @apply text-[11px] font-semibold uppercase tracking-[0.28em] text-zinc-400;
-  }
-
-  .corp-eyebrow-light {
-    @apply text-[11px] font-semibold uppercase tracking-[0.28em] text-zinc-500;
+    @apply text-[11px] font-semibold uppercase tracking-[0.28em] text-patagonia-amber;
   }
 
   .heading-serif {
-    @apply font-serif text-4xl font-light leading-tight tracking-tight text-white md:text-5xl lg:text-6xl;
+    @apply font-serif text-4xl font-light leading-tight tracking-tight text-patagonia-chocolate md:text-5xl lg:text-6xl;
   }
 
   .heading-display {
-    @apply font-display text-3xl font-semibold tracking-tight text-white md:text-4xl;
+    @apply font-display text-3xl font-semibold tracking-tight text-patagonia-taupe md:text-4xl;
+  }
+
+  .heading-hero {
+    @apply font-serif text-2xl font-semibold uppercase leading-[1.15] tracking-[0.1em] text-patagonia-chocolate sm:text-3xl lg:text-[2rem] xl:text-4xl;
+  }
+
+  .body-text {
+    @apply text-sm leading-relaxed text-patagonia-taupe/90 md:text-base;
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center border border-white/20 bg-white px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-slate-950 transition-all duration-300 hover:bg-zinc-100 hover:shadow-lg hover:shadow-white/10;
+    @apply inline-flex items-center justify-center bg-patagonia-copper px-7 py-3.5 text-xs font-medium uppercase tracking-wide text-white transition-all duration-300 hover:bg-patagonia-taupe hover:shadow-lg hover:shadow-stone-300/40;
   }
 
+  .btn-cta-gold,
+  .btn-cta-copper {
+    @apply inline-flex items-center justify-center bg-patagonia-copper px-7 py-3.5 text-xs font-medium uppercase tracking-wide text-white transition-all duration-300 hover:bg-patagonia-taupe hover:shadow-lg hover:shadow-stone-300/40;
+  }
+
+  .btn-ghost-editorial,
   .btn-ghost-glass {
-    @apply inline-flex items-center justify-center border border-white/25 bg-white/5 px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] text-white backdrop-blur-sm transition-all duration-300 hover:border-white/40 hover:bg-white/10;
+    @apply inline-flex items-center justify-center border border-patagonia-border bg-patagonia-white/90 px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.18em] text-patagonia-taupe backdrop-blur-sm transition-all duration-300 hover:border-patagonia-copper/40 hover:text-patagonia-chocolate;
   }
 
-  .material-card,
-  .showcase-card {
-    @apply relative overflow-hidden rounded-sm border border-white/10 bg-zinc-900/30 shadow-glass backdrop-blur-md transition-all duration-500 ease-out hover:scale-[1.01] hover:border-white/15 hover:shadow-2xl hover:shadow-white/5;
-  }
-
-  .btn-cta-gold {
-    @apply inline-flex items-center justify-center bg-amber-100 px-7 py-3.5 text-xs font-medium uppercase tracking-wide text-stone-900 transition-all duration-300 hover:bg-white hover:shadow-lg hover:shadow-amber-100/10;
+  .showcase-card,
+  .material-card {
+    @apply relative overflow-hidden rounded-sm border border-patagonia-border bg-white/80 shadow-editorial backdrop-blur-md transition-all duration-500 ease-out hover:scale-[1.01] hover:border-patagonia-copper/25 hover:shadow-xl hover:shadow-stone-200/50;
   }
 
   .cert-badge-prominent {
-    @apply glass-panel rounded-sm border border-amber-100/20 bg-zinc-900/50 p-8 shadow-glass backdrop-blur-md transition-all duration-500 hover:scale-[1.01] hover:border-amber-100/35 hover:shadow-2xl hover:shadow-amber-100/5 hover:ring-1 hover:ring-amber-100/25;
+    @apply rounded-sm border border-patagonia-copper/20 bg-patagonia-white p-8 shadow-editorial transition-all duration-500 hover:scale-[1.01] hover:border-patagonia-copper/35 hover:shadow-editorial-hover;
   }
 
   .workflow-step-active {
-    @apply ring-1 ring-zinc-400/30;
+    @apply border-patagonia-copper/40 ring-1 ring-patagonia-copper/20;
   }
 
   .cert-badge {
-    @apply glass-panel glass-panel-hover rounded-sm p-8 transition-all duration-500 hover:ring-1 hover:ring-zinc-400/30;
+    @apply editorial-card editorial-card-hover p-8 transition-all duration-500 hover:ring-1 hover:ring-patagonia-amber/20;
   }
 
-  .site-header--glass {
-    @apply border-b border-white/10 bg-zinc-950/50 shadow-glass backdrop-blur-xl;
-  }
-
+  .site-header--glass,
   .site-header--glass-solid {
-    @apply border-b border-white/10 bg-zinc-950/80 shadow-glass backdrop-blur-xl;
+    @apply border-b border-patagonia-border bg-patagonia-white/90 shadow-editorial backdrop-blur-xl;
   }
 
   .nav-link {
@@ -100,39 +108,46 @@
   }
 
   .nav-link--light {
-    @apply text-zinc-400 hover:text-white;
+    @apply text-patagonia-taupe/80 hover:text-patagonia-chocolate;
   }
 
   .nav-link--active.nav-link--light {
-    @apply text-white;
+    @apply text-patagonia-chocolate;
   }
 
-  /* Floating label fields */
   .float-field {
     @apply relative;
   }
 
   .float-input {
-    @apply w-full rounded-sm border border-white/10 bg-zinc-900/50 px-4 pb-2.5 pt-6 text-sm text-zinc-100 placeholder-transparent backdrop-blur-sm transition-colors duration-300 focus:border-zinc-400 focus:bg-zinc-900/70 focus:outline-none focus:ring-1 focus:ring-zinc-400/50;
+    @apply w-full rounded-sm border border-patagonia-border bg-white px-4 pb-2.5 pt-6 text-sm text-patagonia-taupe placeholder-transparent transition-colors duration-300 focus:border-patagonia-copper/50 focus:outline-none focus:ring-1 focus:ring-patagonia-copper/30;
   }
 
   .float-input.ng-touched.ng-invalid {
-    @apply border-rose-400/40 focus:border-rose-400/50 focus:ring-rose-400/20;
+    @apply border-red-300/80 focus:border-red-400/60 focus:ring-red-300/30;
   }
 
   .float-label {
-    @apply pointer-events-none absolute left-4 top-4 text-xs font-medium uppercase tracking-wider text-zinc-500 transition-all duration-300 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-[10px] peer-focus:text-zinc-400 peer-[:not(:placeholder-shown)]:top-2 peer-[:not(:placeholder-shown)]:text-[10px];
+    @apply pointer-events-none absolute left-4 top-4 text-xs font-medium uppercase tracking-wider text-patagonia-amber/80 transition-all duration-300 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-[10px] peer-focus:text-patagonia-copper peer-[:not(:placeholder-shown)]:top-2 peer-[:not(:placeholder-shown)]:text-[10px];
   }
 
   .float-select {
-    @apply w-full appearance-none rounded-sm border border-white/10 bg-zinc-900/50 px-4 py-3.5 text-sm text-zinc-100 backdrop-blur-sm transition-colors duration-300 focus:border-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400/50;
+    @apply w-full appearance-none rounded-sm border border-patagonia-border bg-white px-4 py-3.5 text-sm text-patagonia-taupe transition-colors duration-300 focus:border-patagonia-copper/50 focus:outline-none focus:ring-1 focus:ring-patagonia-copper/30;
   }
 
   .float-select.ng-touched.ng-invalid {
-    @apply border-rose-400/40;
+    @apply border-red-300/80;
   }
 
   .workflow-line {
-    @apply absolute left-0 right-0 top-8 hidden h-px bg-gradient-to-r from-transparent via-zinc-600 to-transparent md:block;
+    @apply absolute left-0 right-0 top-8 hidden h-px border-t border-patagonia-amber/30 md:block;
+  }
+
+  .link-editorial {
+    @apply text-xs font-semibold uppercase tracking-[0.2em] text-patagonia-amber transition-colors hover:text-patagonia-copper;
+  }
+
+  .text-email-accent {
+    @apply font-semibold text-patagonia-taupe transition-colors hover:text-patagonia-copper;
   }
 }
