@@ -1,0 +1,23 @@
+.testimonials {
+  @apply overflow-hidden py-24 md:py-32;
+}
+
+.testimonials__heading {
+  @apply text-3xl font-semibold text-patagonia-taupe;
+}
+
+.testimonials__track {
+  @apply mt-8 flex gap-5 overflow-x-auto pb-2 snap-x snap-mandatory;
+}
+
+.testimonials__card {
+  @apply min-w-[320px] snap-start rounded-sm border border-patagonia-border bg-white p-6 shadow-editorial ease-luxury transition-all duration-700 hover:-translate-y-1 hover:shadow-museum-lift;
+}
+
+.testimonials__text {
+  @apply text-patagonia-taupe/85;
+}
+
+.testimonials__author {
+  @apply mt-4 text-sm font-medium text-patagonia-chocolate;
+}

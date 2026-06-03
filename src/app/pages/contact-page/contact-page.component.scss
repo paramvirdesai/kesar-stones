@@ -1,0 +1,59 @@
+.page-hero {
+  @apply border-b border-patagonia-border;
+}
+
+.page-hero__inner {
+  @apply py-16 pt-28;
+}
+
+.contact-page__grid {
+  @apply grid gap-10 md:grid-cols-5 md:gap-12;
+}
+
+.contact-page__aside {
+  @apply lg:col-span-2;
+}
+
+.contact-page__info {
+  @apply mt-8 space-y-6 p-8 text-sm;
+}
+
+.contact-page__info-row {
+  @apply border-t border-patagonia-border pt-6;
+}
+
+.contact-page__form {
+  @apply p-8 md:p-10 lg:col-span-3;
+}
+
+.contact-page__form-title {
+  @apply font-display text-lg font-bold text-patagonia-chocolate;
+}
+
+.contact-page__fields {
+  @apply mt-8 grid gap-6 md:grid-cols-2;
+}
+
+.contact-page__field-full {
+  @apply md:col-span-2;
+}
+
+.contact-page__textarea {
+  @apply min-h-[140px] resize-y pt-6;
+}
+
+.contact-page__submit {
+  @apply mt-8 w-full disabled:opacity-50;
+}
+
+.contact-page__message {
+  @apply mt-4 text-sm;
+}
+
+.contact-page__message--error {
+  @apply text-red-600/80;
+}
+
+.contact-page__message--success {
+  @apply text-emerald-700/90;
+}

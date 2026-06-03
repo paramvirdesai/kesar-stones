@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import { HomePageComponent } from './pages/home-page.component';
-import { ProductsPageComponent } from './pages/products-page.component';
-import { ContactPageComponent } from './pages/contact-page.component';
-import { AboutPageComponent } from './pages/about-page.component';
-import { CertificationsPageComponent } from './pages/certifications-page.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { ProductsPageComponent } from './pages/products-page/products-page.component';
+import { ContactPageComponent } from './pages/contact-page/contact-page.component';
+import { AboutPageComponent } from './pages/about-page/about-page.component';
+import { CertificationsPageComponent } from './pages/certifications-page/certifications-page.component';
 
 export const appRoutes: Routes = [
   { path: '', component: HomePageComponent, title: 'Iconic Stones | Global Stone Export' },

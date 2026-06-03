@@ -1,0 +1,313 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-patagonia-cream font-sans text-patagonia-taupe;
+  }
+
+  /* Anchor targets clear fixed navbar without global smooth-scroll jank */
+  #discover,
+  #export-desk {
+    scroll-margin-top: 5.5rem;
+  }
+
+  ::selection {
+    @apply bg-patagonia-copper/30 text-patagonia-chocolate;
+  }
+}
+
+@layer components {
+  .corp-container {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-5 md:px-8;
+  }
+
+  .page-hero {
+    @apply border-b border-patagonia-border;
+  }
+
+  .page-hero__inner {
+    @apply py-12 pt-24 sm:py-14 sm:pt-28 md:py-16;
+  }
+
+  .corp-section {
+    @apply py-16 sm:py-20 md:py-24 lg:py-32;
+  }
+
+  .patagonia-bg,
+  .premium-dark {
+    @apply bg-patagonia-cream;
+  }
+
+  .patagonia-bg-alt,
+  .premium-dark-alt {
+    @apply bg-patagonia-ivory/40;
+  }
+
+  .ease-luxury {
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .editorial-card,
+  .glass-panel {
+    @apply rounded-sm border border-patagonia-border bg-white/95 shadow-editorial;
+  }
+
+  .editorial-card-hover {
+    @apply ease-luxury transition-[border-color,background-color,box-shadow] duration-300 hover:border-patagonia-copper/20 hover:bg-patagonia-white hover:shadow-editorial-hover;
+  }
+
+  .corp-eyebrow {
+    @apply text-[11px] font-semibold uppercase tracking-[0.32em] text-patagonia-amber;
+  }
+
+  .heading-serif {
+    @apply font-serif text-4xl font-light leading-tight tracking-tight text-patagonia-taupe md:text-5xl lg:text-6xl;
+  }
+
+  .heading-display {
+    @apply font-display text-3xl font-semibold tracking-tight text-patagonia-taupe md:text-4xl lg:text-5xl;
+  }
+
+  .heading-cinematic {
+    @apply font-display text-[clamp(1.75rem,6vw,4.5rem)] font-extrabold leading-[1.05] tracking-tighter text-patagonia-taupe sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl;
+  }
+
+  .body-text {
+    @apply text-sm leading-relaxed text-patagonia-taupe/85 md:text-base md:leading-relaxed;
+  }
+
+  .btn-cta-copper {
+    @apply inline-flex items-center justify-center bg-patagonia-copper px-8 py-4 text-xs font-medium uppercase tracking-[0.22em] text-white ease-luxury transition-[background-color,box-shadow] duration-300 hover:bg-patagonia-taupe hover:shadow-museum-lift;
+  }
+
+  .btn-cta-luxury {
+    @apply inline-flex w-full items-center justify-center bg-patagonia-taupe px-8 py-4 text-sm font-medium uppercase tracking-[0.28em] text-white ease-luxury transition-[background-color,box-shadow] duration-300 hover:bg-patagonia-copper hover:shadow-museum-lift disabled:opacity-50;
+  }
+
+  .btn-ghost-editorial {
+    @apply inline-flex items-center justify-center border border-patagonia-border/80 bg-patagonia-white px-8 py-4 text-xs font-semibold uppercase tracking-[0.22em] text-patagonia-taupe ease-luxury transition-[border-color,color,background-color] duration-300 hover:border-patagonia-copper/40 hover:text-patagonia-chocolate;
+  }
+
+  .museum-card,
+  .showcase-card {
+    @apply relative overflow-hidden rounded-sm border border-patagonia-border/80 bg-white shadow-editorial ease-luxury transition-[transform,border-color,box-shadow] duration-300 hover:border-patagonia-copper/25 hover:shadow-editorial-hover;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .museum-card:hover,
+    .showcase-card:hover {
+      transform: scale(1.015);
+    }
+  }
+
+  .workflow-step-number-active {
+    @apply border-patagonia-copper/30 bg-patagonia-copper text-white;
+  }
+
+  .museum-card__media {
+    @apply overflow-hidden ease-luxury transition-transform duration-300;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .group:hover .museum-card__media {
+      transform: scale(1.03);
+    }
+  }
+
+  .museum-card__caption {
+    @apply ease-luxury transition-transform duration-300;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .group:hover .museum-card__caption {
+      transform: translateY(-2px);
+    }
+  }
+
+  .glow-frame {
+    @apply relative overflow-hidden rounded-sm border border-patagonia-copper/20 bg-white p-3 shadow-editorial;
+  }
+
+  .glow-frame__inner {
+    @apply overflow-hidden rounded-sm;
+  }
+
+  .trust-tile {
+    @apply block rounded-sm border border-patagonia-border bg-white p-8 text-left shadow-editorial ease-luxury transition-[transform,box-shadow] duration-300;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .trust-tile:hover {
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 32px 80px rgba(74, 68, 63, 0.14), 0 12px 32px rgba(74, 68, 63, 0.08);
+    }
+  }
+
+  .trust-tile--prominent {
+    @apply hover:ring-2 hover:ring-patagonia-copper/30;
+  }
+
+  .cert-badge {
+    @apply editorial-card editorial-card-hover p-8;
+  }
+
+  .cert-badge-prominent {
+    @apply rounded-sm border border-patagonia-copper/20 bg-patagonia-white p-8 shadow-editorial ease-luxury transition-[transform,border-color,box-shadow] duration-300 hover:border-patagonia-copper/35 hover:shadow-editorial-hover;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .cert-badge-prominent:hover {
+      transform: scale(1.01);
+    }
+  }
+
+  .workflow-step {
+    @apply relative rounded-sm border border-patagonia-border/60 bg-white p-8 ease-luxury transition-[border-color,background-color,box-shadow] duration-300;
+  }
+
+  .workflow-step-active {
+    @apply border-patagonia-copper/20 bg-white shadow-editorial-hover ring-1 ring-patagonia-copper/20;
+  }
+
+  .workflow-connector {
+    @apply absolute left-0 right-0 top-10 hidden h-px bg-patagonia-amber/20 md:block;
+  }
+
+  .workflow-connector-active {
+    @apply bg-gradient-to-r from-patagonia-copper/40 via-patagonia-amber/30 to-patagonia-copper/40;
+  }
+
+  .site-header--glass {
+    @apply border-b border-transparent bg-patagonia-cream/0;
+  }
+
+  .site-header--glass-solid {
+    @apply border-b border-patagonia-border/80 bg-patagonia-white/95 shadow-editorial;
+  }
+
+  .site-header--hero {
+    @apply border-b border-transparent bg-transparent;
+  }
+
+  .nav-link {
+    @apply text-[10px] font-medium uppercase tracking-[0.16em] ease-luxury transition-colors duration-500 md:text-xs md:tracking-[0.18em];
+  }
+
+  .nav-link--light {
+    @apply text-patagonia-taupe/75 hover:text-patagonia-taupe;
+  }
+
+  .nav-link--active.nav-link--light {
+    @apply text-patagonia-taupe;
+  }
+
+  .scroll-indicator {
+    @apply flex shrink-0 flex-col items-center transition-opacity duration-300 hover:opacity-100;
+  }
+
+  .scroll-indicator__line {
+    @apply h-12 w-px origin-top bg-patagonia-taupe/40 animate-scroll-pulse;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-indicator__line {
+      animation: none;
+    }
+  }
+
+  .raw-slider {
+    @apply flex gap-6 overflow-x-auto pb-4 pt-2 snap-x snap-mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .raw-slider::-webkit-scrollbar {
+    display: none;
+  }
+
+  .raw-slider__card {
+    @apply museum-card w-[min(78vw,280px)] shrink-0 snap-center sm:w-[300px] md:w-[340px];
+  }
+
+  .float-field {
+    @apply relative;
+  }
+
+  .float-input {
+    @apply w-full rounded-sm border border-patagonia-border bg-white px-4 pb-2.5 pt-6 text-sm text-patagonia-taupe placeholder-transparent ease-luxury transition-all duration-700 focus:border-patagonia-copper/50 focus:outline-none focus:ring-1 focus:ring-patagonia-copper/30;
+  }
+
+  .float-input.ng-touched.ng-invalid {
+    @apply border-red-300/80;
+  }
+
+  .float-label {
+    @apply pointer-events-none absolute left-4 top-4 text-xs font-medium uppercase tracking-wider text-patagonia-amber/80 ease-luxury transition-all duration-700 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-[10px] peer-focus:text-patagonia-copper peer-[:not(:placeholder-shown)]:top-2 peer-[:not(:placeholder-shown)]:text-[10px];
+  }
+
+  .float-select {
+    @apply w-full appearance-none rounded-sm border border-patagonia-border bg-white px-4 py-3.5 text-sm text-patagonia-taupe ease-luxury transition-all duration-700 focus:border-patagonia-copper/50 focus:outline-none focus:ring-1 focus:ring-patagonia-copper/30;
+  }
+
+  .float-select.ng-touched.ng-invalid {
+    @apply border-red-300/80;
+  }
+
+  .float-field-minimal {
+    @apply relative;
+  }
+
+  .float-input-minimal {
+    @apply w-full border-0 border-b border-patagonia-taupe/10 bg-transparent px-0 pb-3 pt-6 text-sm text-patagonia-taupe placeholder-transparent ease-luxury transition-all duration-700 focus:border-patagonia-copper/50 focus:outline-none focus:ring-0;
+  }
+
+  .float-input-minimal.ng-touched.ng-invalid {
+    @apply border-red-400/50;
+  }
+
+  .float-label-minimal {
+    @apply pointer-events-none absolute left-0 top-5 text-[10px] font-semibold uppercase tracking-[0.24em] text-patagonia-amber/80 ease-luxury transition-all duration-700 peer-placeholder-shown:top-5 peer-placeholder-shown:text-xs peer-focus:top-1 peer-focus:text-[10px] peer-focus:text-patagonia-copper peer-[:not(:placeholder-shown)]:top-1;
+  }
+
+  .float-select-minimal {
+    @apply w-full appearance-none border-0 border-b border-patagonia-taupe/10 bg-transparent px-0 py-5 text-sm text-patagonia-taupe ease-luxury transition-all duration-700 focus:border-patagonia-copper/50 focus:outline-none;
+  }
+
+  .text-email-luxury,
+  .text-email-accent {
+    @apply font-display text-sm font-semibold uppercase tracking-[0.32em] text-patagonia-taupe ease-luxury transition-colors duration-700 hover:text-patagonia-copper;
+  }
+
+  .link-editorial {
+    @apply text-xs font-semibold uppercase tracking-[0.24em] text-patagonia-amber ease-luxury transition-colors duration-700 hover:text-patagonia-copper;
+  }
+
+  .reveal-base {
+    @apply translate-y-6 opacity-0 ease-luxury transition-[transform,opacity] duration-500;
+  }
+
+  .revealed {
+    @apply translate-y-0 opacity-100;
+  }
+}
+
+@layer utilities {
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}

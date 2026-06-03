@@ -1,0 +1,349 @@
+<!-- ═══ HERO ═══ -->
+<section class="home-hero relative overflow-hidden bg-patagonia-cream" aria-label="Hero">
+  <div class="home-hero__bg absolute inset-0" aria-hidden="true">
+    <img
+      [src]="assets.heroQuarryPanorama"
+      alt=""
+      class="home-hero__pan h-full w-full object-cover"
+      fetchpriority="high"
+      decoding="async"
+      width="1920"
+      height="1080"
+    />
+  </div>
+  <div
+    class="home-hero__overlay pointer-events-none absolute inset-0 bg-gradient-to-b from-patagonia-cream/25 via-patagonia-cream/55 to-patagonia-cream"
+    aria-hidden="true"
+  ></div>
+
+  <div class="home-hero__content relative z-10">
+    <div class="home-hero__inner">
+      <p class="corp-eyebrow home-hero__fade home-hero__fade--1 mb-4 sm:mb-6">{{ heroTagline }}</p>
+      <h1 class="heading-cinematic home-hero__fade home-hero__fade--2">
+        {{ heroTitlePrimary }}<br />
+        <span class="text-patagonia-chocolate">{{ heroTitleSecondary }}</span>
+      </h1>
+      <p class="home-hero__subtitle mx-auto mt-6 max-w-xl sm:mt-8 home-hero__fade home-hero__fade--3">
+        {{ heroSubtitle }}
+      </p>
+      <div class="home-hero__actions flex flex-wrap justify-center gap-3 sm:gap-4 home-hero__fade home-hero__fade--4">
+        <a routerLink="/products" class="btn-cta-copper px-6 py-3.5 sm:px-8 sm:py-4">Explore Collections</a>
+        <a href="#discover" class="btn-ghost-editorial px-6 py-3.5 sm:px-8 sm:py-4">Discover</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="home-hero__scroll relative z-10">
+    <a href="#discover" class="scroll-indicator" aria-label="Scroll to featured collections">
+      <span class="scroll-indicator__line" aria-hidden="true"></span>
+      <span class="mt-3 text-[10px] font-semibold uppercase tracking-[0.32em] text-patagonia-taupe/50">Scroll</span>
+    </a>
+  </div>
+</section>
+
+<!-- ═══ FEATURED COLLECTIONS ═══ -->
+<section id="discover" class="corp-section patagonia-bg scroll-section" aria-labelledby="discover-heading">
+  <div class="corp-container">
+    <header class="section-header mx-auto max-w-3xl text-center" appRevealOnScroll>
+      <p class="corp-eyebrow">Featured Collections</p>
+      <h2 id="discover-heading" class="heading-display mt-4">
+        Museum-grade stone.<br class="hidden sm:block" />Architectural scale.
+      </h2>
+      <p class="body-text mx-auto mt-6 max-w-2xl">
+        Finished applications and flagship installations — the specification confidence your clients expect from a
+        quarry-direct export partner.
+      </p>
+    </header>
+
+    <div class="gallery-mosaic">
+      @for (piece of galleryShowcase; track piece.id) {
+        <article
+          class="group museum-card gallery-mosaic__card"
+          [class.gallery-mosaic__card--wide]="piece.layout === 'wide'"
+          [class.gallery-mosaic__card--offset]="piece.layout === 'offset'"
+          [class.gallery-mosaic__card--glow]="piece.layout === 'glow'"
+          appRevealOnScroll
+          [revealDelay]="$index * 80"
+        >
+          @if (piece.layout === 'glow') {
+            <div class="glow-frame__inner gallery-mosaic__media gallery-mosaic__media--glow">
+              <img [src]="piece.image" [alt]="piece.title" class="gallery-mosaic__img" loading="lazy" decoding="async" />
+            </div>
+          } @else {
+            <div
+              class="gallery-mosaic__media museum-card__media"
+              [class.gallery-mosaic__media--wide]="piece.layout === 'wide'"
+              [class.gallery-mosaic__media--offset]="piece.layout === 'offset'"
+            >
+              <img [src]="piece.image" [alt]="piece.title" class="gallery-mosaic__img" loading="lazy" decoding="async" />
+            </div>
+          }
+          <div class="museum-card__caption p-5 sm:p-6" [ngClass]="{ 'md:p-8': piece.layout === 'wide' }">
+            <p class="corp-eyebrow">{{ piece.category }}</p>
+            <h3 class="heading-display mt-2" [class.text-xl]="piece.layout !== 'wide'" [class.sm:text-2xl]="piece.layout === 'wide'" [class.md:text-3xl]="piece.layout === 'wide'">
+              {{ piece.title }}
+            </h3>
+            <p class="body-text mt-2">{{ piece.subtitle }}</p>
+            @if (piece.specs) {
+              <p class="mt-3 text-xs uppercase tracking-[0.2em] text-patagonia-amber/80">{{ piece.specs }}</p>
+            }
+            <a routerLink="/products" class="link-editorial mt-4 inline-block">View in catalog →</a>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RAW INVENTORY ═══ -->
+<section class="corp-section patagonia-bg-alt scroll-section" aria-labelledby="raw-heading">
+  <div class="corp-container">
+    <header class="section-header flex flex-col gap-6 md:flex-row md:items-end md:justify-between" appRevealOnScroll>
+      <div>
+        <p class="corp-eyebrow">Wholesale Inventory</p>
+        <h2 id="raw-heading" class="heading-display mt-4">Raw slab programs</h2>
+        <p class="body-text mt-4 max-w-xl">
+          Container-ready bundles photographed at quarry and processing — transparent stock for distributor allocation.
+        </p>
+      </div>
+      <a routerLink="/products" class="link-editorial shrink-0">View full catalog →</a>
+    </header>
+
+    <div class="raw-slider -mx-4 mt-8 px-4 sm:-mx-0 sm:mt-10 sm:px-0">
+      @for (card of rawSliderCards; track card.id) {
+        <article class="group raw-slider__card" appRevealOnScroll [revealDelay]="$index * 60">
+          <div class="museum-card__media relative aspect-[3/4]">
+            <img [src]="card.image" [alt]="card.title" class="h-full w-full object-cover" loading="lazy" decoding="async" />
+            <div class="raw-slider__overlay">
+              <p class="text-xs font-semibold uppercase tracking-[0.22em] text-patagonia-taupe">{{ rawHoverOverlay }}</p>
+            </div>
+          </div>
+          <div class="p-5">
+            <p class="corp-eyebrow">{{ card.category }}</p>
+            <h3 class="heading-display mt-2 text-lg">{{ card.title }}</h3>
+            <p class="body-text mt-1">{{ card.subtitle }}</p>
+            @if (card.specs) {
+              <p class="mt-3 text-[10px] uppercase tracking-[0.2em] text-patagonia-amber/80">{{ card.specs }}</p>
+            }
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ═══ OUR STORY ═══ -->
+<section class="corp-section patagonia-bg scroll-section" aria-labelledby="story-heading">
+  <div class="corp-container">
+    <div class="home-story grid gap-10 md:grid-cols-12 md:gap-12 lg:gap-16">
+      <div class="md:col-span-5" appRevealOnScroll>
+        <p class="corp-eyebrow">Our Story</p>
+        <h2 id="story-heading" class="heading-display mt-4">From Rajsamand blocks to global containers</h2>
+        <div class="mt-8 space-y-6">
+          @for (paragraph of storyParagraphs; track $index) {
+            <p class="body-text">{{ paragraph }}</p>
+          }
+        </div>
+        <a routerLink="/about" class="link-editorial mt-8 inline-block">Read corporate profile →</a>
+      </div>
+
+      <div class="home-story__grid md:col-span-7">
+        @for (img of storyMosaic; track img.src; let i = $index) {
+          <div
+            class="home-story__tile rounded-sm border border-patagonia-border/80 shadow-editorial"
+            [class.home-story__tile--primary]="i === 0"
+            [class.home-story__tile--secondary]="i === 1"
+            appRevealOnScroll
+            [revealDelay]="i * 100"
+          >
+            <img [src]="img.src" [alt]="img.alt" class="h-full min-h-[200px] w-full object-cover md:min-h-0" loading="lazy" decoding="async" />
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EXPORT WORKFLOW ═══ -->
+<section class="corp-section patagonia-bg-alt scroll-section" aria-labelledby="workflow-heading">
+  <div class="corp-container">
+    <div class="home-workflow grid gap-10 md:grid-cols-2 md:items-start md:gap-12 lg:gap-16">
+      <div appRevealOnScroll>
+        <p class="corp-eyebrow">Export Workflow</p>
+        <h2 id="workflow-heading" class="heading-display mt-4">Quarry to port, documented end-to-end</h2>
+        <p class="body-text mt-6 max-w-xl">
+          Three-stage pipeline built for B2B procurement — traceable blocks, calibrated processing, and port-ready
+          logistics.
+        </p>
+
+        <div class="relative mt-10 space-y-3 sm:space-y-4">
+          <div class="workflow-connector" [class.workflow-connector-active]="activeWorkflowStep >= 0" aria-hidden="true"></div>
+          @for (step of workflow; track step.step) {
+            <button
+              type="button"
+              class="workflow-step block w-full text-left"
+              [class.workflow-step-active]="activeWorkflowStep === step.step - 1"
+              [attr.aria-pressed]="activeWorkflowStep === step.step - 1"
+              (click)="setActiveWorkflow(step.step - 1)"
+            >
+              <div class="flex items-start gap-4">
+                <span
+                  class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-patagonia-border text-xs font-semibold"
+                  [class.workflow-step-number-active]="activeWorkflowStep === step.step - 1"
+                >
+                  {{ step.step }}
+                </span>
+                <div>
+                  <h3 class="heading-display text-base sm:text-lg">{{ step.title }}</h3>
+                  <p class="body-text mt-2">{{ step.description }}</p>
+                  <p class="mt-2 text-[10px] uppercase tracking-[0.2em] text-patagonia-amber/80">{{ step.location }}</p>
+                </div>
+              </div>
+            </button>
+          }
+        </div>
+      </div>
+
+      <div class="overflow-hidden rounded-sm border border-patagonia-border/80 shadow-editorial" appRevealOnScroll [revealDelay]="120">
+        <img
+          [src]="assets.workflowLogistics"
+          alt="Export logistics and container loading operations"
+          class="h-full min-h-[260px] w-full object-cover sm:min-h-[320px]"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ COMPLIANCE & TRUST ═══ -->
+<section class="corp-section patagonia-bg scroll-section" aria-labelledby="trust-heading">
+  <div class="corp-container">
+    <header class="section-header mx-auto max-w-3xl text-center" appRevealOnScroll>
+      <p class="corp-eyebrow">Compliance &amp; Trust</p>
+      <h2 id="trust-heading" class="heading-display mt-4">Built for international trade</h2>
+      <p class="body-text mx-auto mt-6 max-w-2xl">
+        Documented export credentials and QA protocols for distributors, developers, and procurement teams.
+      </p>
+    </header>
+
+    <div class="mt-12 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:mt-14 lg:grid-cols-4">
+      @for (badge of complianceBadges; track badge.code) {
+        <article class="trust-tile" [class.trust-tile--prominent]="badge.prominent" appRevealOnScroll [revealDelay]="$index * 70">
+          <p class="corp-eyebrow">{{ badge.code }}</p>
+          <h3 class="heading-display mt-4 text-lg sm:text-xl">{{ badge.title }}</h3>
+          <p class="body-text mt-2">{{ badge.subtitle }}</p>
+          @if (badge.value) {
+            <p class="mt-4 font-mono text-sm tracking-wide text-patagonia-taupe">{{ badge.value }}</p>
+          }
+        </article>
+      }
+    </div>
+
+    <div class="mt-10 text-center">
+      <a routerLink="/certifications" class="link-editorial">View full certifications →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EXPORT DESK ═══ -->
+<section id="export-desk" class="corp-section patagonia-bg-alt scroll-section" aria-labelledby="inquiry-heading">
+  <div class="corp-container">
+    <header class="section-header mx-auto max-w-3xl text-center" appRevealOnScroll>
+      <p class="corp-eyebrow">Export Desk</p>
+      <h2 id="inquiry-heading" class="heading-display mt-4">Start a B2B inquiry</h2>
+      <p class="body-text mx-auto mt-6 max-w-2xl">
+        Share your port, material interest, and project scope — our export team responds within 1–2 business days.
+      </p>
+    </header>
+
+    <form class="home-inquiry mx-auto mt-10 max-w-2xl sm:mt-12" [formGroup]="inquiryForm" (ngSubmit)="submitInquiry()" appRevealOnScroll [revealDelay]="100" novalidate>
+      <div class="space-y-7 sm:space-y-8">
+        <div class="float-field-minimal">
+          <input
+            id="home-name"
+            class="peer float-input-minimal"
+            formControlName="name"
+            placeholder=" "
+            autocomplete="name"
+            [class.home-inquiry__invalid]="formSubmitted && inquiryForm.get('name')?.invalid"
+          />
+          <label class="float-label-minimal" for="home-name">Full Name *</label>
+        </div>
+        <div class="float-field-minimal">
+          <input
+            id="home-email"
+            type="email"
+            class="peer float-input-minimal"
+            formControlName="email"
+            placeholder=" "
+            autocomplete="email"
+            [class.home-inquiry__invalid]="formSubmitted && inquiryForm.get('email')?.invalid"
+          />
+          <label class="float-label-minimal" for="home-email">Business Email *</label>
+        </div>
+        <div class="float-field-minimal">
+          <input
+            id="home-port"
+            class="peer float-input-minimal"
+            formControlName="destinationPort"
+            placeholder=" "
+            [class.home-inquiry__invalid]="formSubmitted && inquiryForm.get('destinationPort')?.invalid"
+          />
+          <label class="float-label-minimal" for="home-port">Destination Port *</label>
+        </div>
+        <div>
+          <label class="sr-only" for="home-material">Material Interest</label>
+          <select
+            id="home-material"
+            class="float-select-minimal"
+            formControlName="materialInterest"
+            [class.home-inquiry__invalid]="formSubmitted && inquiryForm.get('materialInterest')?.invalid"
+          >
+            <option value="">Select material *</option>
+            @for (opt of materialOptions; track opt) {
+              <option [value]="opt">{{ opt }}</option>
+            }
+          </select>
+        </div>
+        <div class="float-field-minimal">
+          <textarea
+            id="home-message"
+            class="peer float-input-minimal min-h-[120px] resize-none"
+            rows="4"
+            formControlName="message"
+            placeholder=" "
+            [class.home-inquiry__invalid]="formSubmitted && inquiryForm.get('message')?.invalid"
+          ></textarea>
+          <label class="float-label-minimal" for="home-message">Project Details *</label>
+        </div>
+      </div>
+
+      <button [disabled]="formLoading" class="btn-cta-copper mt-8 w-full sm:mt-10" type="submit">
+        {{ formLoading ? 'Submitting…' : 'Submit B2B Inquiry' }}
+      </button>
+
+      <p class="mt-6 text-center text-sm text-patagonia-taupe/70">
+        Prefer a detailed form?
+        <a routerLink="/contact" class="link-editorial ml-1">Go to export desk →</a>
+      </p>
+
+      @if (formSubmitted && inquiryForm.invalid) {
+        <p class="home-inquiry__message home-inquiry__message--error" role="alert">Please complete all required fields.</p>
+      }
+      @if (formStatus === 'success') {
+        <p class="home-inquiry__message home-inquiry__message--success" role="status">
+          Inquiry received. Our export desk will contact you shortly.
+        </p>
+      }
+      @if (formStatus === 'error') {
+        <p class="home-inquiry__message home-inquiry__message--error" role="alert">
+          Submission failed. Email
+          <a href="mailto:info@theexoticstones.com" class="underline">info&#64;theexoticstones.com</a>
+          directly.
+        </p>
+      }
+    </form>
+  </div>
+</section>

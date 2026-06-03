@@ -1,0 +1,35 @@
+.navbar {
+  @apply fixed top-0 z-50 w-full transition-[background-color,border-color,box-shadow] duration-300;
+}
+
+.navbar__inner {
+  @apply flex items-center justify-between gap-3 py-4 sm:py-5 md:py-6;
+}
+
+.navbar__brand {
+  @apply flex min-w-0 items-center gap-2 sm:gap-3;
+}
+
+.navbar__brand-text {
+  @apply min-w-0 leading-tight;
+}
+
+.navbar__title {
+  @apply font-display block truncate text-base font-bold tracking-tight text-patagonia-taupe sm:text-lg md:text-xl;
+}
+
+.navbar__tagline {
+  @apply block truncate text-[9px] font-medium uppercase tracking-[0.28em] text-patagonia-amber sm:text-[10px] sm:tracking-[0.32em];
+}
+
+.navbar__links {
+  @apply hidden shrink-0 items-center gap-6 md:flex lg:gap-10;
+}
+
+.navbar__cta--desktop {
+  @apply hidden shrink-0 text-[10px] md:inline-flex;
+}
+
+.navbar__cta--mobile {
+  @apply shrink-0 px-3 py-2.5 text-[10px] md:hidden;
+}

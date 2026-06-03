@@ -1,0 +1,67 @@
+.page-hero {
+  @apply border-b border-patagonia-border;
+}
+
+.about-page__hero {
+  @apply grid items-center gap-10 py-16 pt-28 lg:grid-cols-2;
+}
+
+.about-page__hero-image-wrap {
+  @apply overflow-hidden rounded-sm border border-patagonia-border shadow-editorial;
+}
+
+.about-page__hero-image {
+  @apply aspect-[4/3] w-full object-cover;
+}
+
+.about-page__profile {
+  @apply border-b border-patagonia-border;
+}
+
+.about-page__profile-grid {
+  @apply grid gap-12 lg:grid-cols-2;
+}
+
+.about-page__copy {
+  @apply mt-6 space-y-4 body-text;
+}
+
+.about-page__footprint {
+  @apply p-8;
+}
+
+.about-page__footprint-title {
+  @apply font-display font-bold text-patagonia-chocolate;
+}
+
+.about-page__footprint-list {
+  @apply mt-6 divide-y divide-patagonia-border text-sm text-patagonia-taupe/85;
+
+  strong {
+    @apply text-patagonia-chocolate;
+  }
+
+  li {
+    @apply py-4;
+  }
+}
+
+.about-page__standards {
+  @apply mt-10 grid gap-6 md:grid-cols-3;
+}
+
+.about-page__standard-card {
+  @apply p-6 text-sm text-patagonia-taupe/85;
+}
+
+.about-page__standard-title {
+  @apply block font-display text-patagonia-chocolate;
+}
+
+.about-page__standard-text {
+  @apply mt-2 block;
+}
+
+.about-page__inquiry-cta {
+  @apply mt-10 inline-flex;
+}

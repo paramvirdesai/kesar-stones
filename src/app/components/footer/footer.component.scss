@@ -1,0 +1,31 @@
+.footer {
+  @apply border-t border-patagonia-border bg-patagonia-ivory;
+}
+
+.footer__grid {
+  @apply grid gap-10 py-14 md:grid-cols-4;
+}
+
+.footer__brand {
+  @apply flex items-center gap-2;
+}
+
+.footer__brand-name {
+  @apply font-display text-lg font-bold text-patagonia-chocolate;
+}
+
+.footer__blurb {
+  @apply mt-4 text-sm leading-relaxed text-patagonia-taupe/80;
+}
+
+.footer__list {
+  @apply mt-3 space-y-2 text-sm text-patagonia-taupe/85;
+}
+
+.footer__link {
+  @apply ease-luxury transition-colors duration-700 hover:text-patagonia-copper;
+}
+
+.footer__legal {
+  @apply border-t border-patagonia-border py-6 text-center text-xs text-patagonia-taupe/60;
+}

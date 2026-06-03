@@ -1,0 +1,11 @@
+.logo {
+  @apply h-10 w-10 shrink-0;
+}
+
+.logo__bg {
+  @apply fill-current opacity-10;
+}
+
+.logo__mark {
+  @apply fill-current;
+}

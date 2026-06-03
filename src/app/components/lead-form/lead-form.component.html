@@ -1,0 +1,35 @@
+<section class="lead-form">
+  <div class="corp-container lead-form__grid">
+    <div>
+      <p class="corp-eyebrow">Private Consultation</p>
+      <h2 class="lead-form__title">Begin a material<br />conversation.</h2>
+      <p class="lead-form__intro">
+        Share your project vision. Our team will respond with curated selections and a tailored sourcing approach.
+      </p>
+    </div>
+
+    <form class="lead-form__panel" [formGroup]="leadForm" (ngSubmit)="submit()">
+      <input class="lead-form__input" placeholder="Name" formControlName="name" />
+      <input class="lead-form__input" placeholder="Studio / Company" formControlName="company" />
+      <input class="lead-form__input" placeholder="Email" formControlName="email" />
+      <textarea class="lead-form__input lead-form__textarea" rows="4" placeholder="Project narrative" formControlName="message"></textarea>
+      <div class="lead-form__actions">
+        <button [disabled]="loading" class="btn-cta-copper lead-form__submit" type="submit">
+          @if (loading) {
+            <span class="lead-form__spinner" aria-hidden="true"></span>
+          }
+          {{ loading ? 'Sending' : 'Request Consultation' }}
+        </button>
+        @if (submitted && leadForm.invalid) {
+          <p class="lead-form__message lead-form__message--error">Please complete all fields with valid details.</p>
+        }
+        @if (status === 'success') {
+          <p class="lead-form__message lead-form__message--success">Thank you. Our team will be in touch shortly.</p>
+        }
+        @if (status === 'error') {
+          <p class="lead-form__message lead-form__message--error">Unable to send. Please try again.</p>
+        }
+      </div>
+    </form>
+  </div>
+</section>

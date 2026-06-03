@@ -1,0 +1,49 @@
+<section class="page-hero patagonia-bg">
+  <div class="corp-container page-hero__inner">
+    <p class="corp-eyebrow">Stone Collections</p>
+    <h1 class="heading-serif mt-4">Export-grade materials catalog</h1>
+    <p class="body-text mt-6 max-w-2xl">
+      Bulk programs for granite, marble, quartzite, quartz slabs, and artificial stone —
+      sourced from Iconic Stones quarries and partner processing facilities.
+    </p>
+  </div>
+</section>
+
+<section class="corp-section patagonia-bg-alt">
+  <div class="corp-container">
+    <div class="products-page__grid">
+      @for (m of materials; track m.id) {
+        <article class="group showcase-card products-page__card">
+          <div class="products-page__media">
+            @defer (on viewport) {
+              <img [src]="m.imageUrl" [alt]="m.name" class="products-page__image" loading="lazy" />
+            } @placeholder {
+              <div class="products-page__placeholder"></div>
+            }
+            <div class="products-page__overlay">
+              <p class="products-page__overlay-text">{{ rawHoverOverlay }}</p>
+            </div>
+          </div>
+          <div class="products-page__body">
+            <p class="products-page__category">{{ m.category }}</p>
+            <h2 class="products-page__name">{{ m.name }}</h2>
+            <p class="products-page__quarry">{{ m.quarryLabel }}</p>
+            <p class="products-page__desc">{{ m.description }}</p>
+            <a routerLink="/contact" [queryParams]="{ material: m.name }" class="link-editorial products-page__cta">
+              Request Quote →
+            </a>
+          </div>
+        </article>
+      }
+
+      <article class="showcase-card products-page__catalog-cta">
+        <p class="products-page__catalog-count">50+</p>
+        <h2 class="products-page__catalog-title">Additional Varieties</h2>
+        <p class="products-page__catalog-desc">
+          Full catalog for container programs including mixed loads, artificial quartz, and specialty exotic grades.
+        </p>
+        <a routerLink="/contact" class="btn-ghost-editorial mt-8">Request Full Catalog</a>
+      </article>
+    </div>
+  </div>
+</section>

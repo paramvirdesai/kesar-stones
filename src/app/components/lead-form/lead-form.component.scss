@@ -1,0 +1,51 @@
+.lead-form {
+  @apply bg-patagonia-cream py-24;
+}
+
+.lead-form__grid {
+  @apply grid gap-16 lg:grid-cols-2 lg:gap-24;
+}
+
+.lead-form__title {
+  @apply font-display mt-6 text-4xl font-light leading-tight text-patagonia-taupe md:text-5xl;
+}
+
+.lead-form__intro {
+  @apply mt-8 max-w-md text-sm leading-relaxed text-patagonia-taupe/80;
+}
+
+.lead-form__panel {
+  @apply editorial-card flex flex-col gap-4 p-8;
+}
+
+.lead-form__input {
+  @apply w-full border-b border-patagonia-border bg-transparent py-3 text-patagonia-taupe placeholder:text-patagonia-taupe/40 focus:border-patagonia-copper focus:outline-none;
+}
+
+.lead-form__textarea {
+  @apply min-h-[120px] resize-none;
+}
+
+.lead-form__actions {
+  @apply mt-6;
+}
+
+.lead-form__submit {
+  @apply w-full justify-center disabled:opacity-50;
+}
+
+.lead-form__spinner {
+  @apply mr-2 inline-block h-3 w-3 animate-spin rounded-full border border-white/30 border-t-white;
+}
+
+.lead-form__message {
+  @apply mt-4 text-xs;
+}
+
+.lead-form__message--error {
+  @apply text-red-600/80;
+}
+
+.lead-form__message--success {
+  @apply text-patagonia-taupe;
+}

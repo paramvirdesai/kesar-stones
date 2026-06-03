@@ -1,0 +1,53 @@
+<section class="page-hero patagonia-bg">
+  <div class="corp-container page-hero__inner">
+    <p class="corp-eyebrow">Compliance &amp; Credentials</p>
+    <h1 class="heading-serif mt-4">Certifications &amp; corporate registration</h1>
+    <p class="body-text mt-6 max-w-2xl">
+      Iconic Stones maintains export compliance and quality standards for seamless international B2B transactions.
+    </p>
+  </div>
+</section>
+
+<section class="corp-section patagonia-bg-alt certifications-page__credentials">
+  <div class="corp-container">
+    <h2 class="heading-display text-2xl">Registered business credentials</h2>
+    <div class="certifications-page__gst-grid">
+      <div class="cert-badge-prominent">
+        <p class="corp-eyebrow">GST Number</p>
+        <p class="certifications-page__number">{{ gstNumber }}</p>
+        <p class="certifications-page__note">Goods and Services Tax registration — Government of India</p>
+      </div>
+      <div class="cert-badge-prominent">
+        <p class="corp-eyebrow">Import-Export Code (IEC)</p>
+        <p class="certifications-page__number">{{ iecNumber }}</p>
+        <p class="certifications-page__note">DGFT authorized — Ministry of Commerce, Govt. of India</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="corp-section patagonia-bg">
+  <div class="corp-container">
+    <h2 class="heading-display text-2xl">International quality certifications</h2>
+    <div class="certifications-page__cert-grid">
+      @for (cert of certifications; track cert.badge) {
+        <article class="cert-badge certifications-page__cert-card">
+          <div class="certifications-page__badge-icon">{{ cert.badge }}</div>
+          <h3 class="certifications-page__cert-title">{{ cert.title }}</h3>
+          <p class="certifications-page__cert-subtitle">{{ cert.subtitle }}</p>
+          <p class="certifications-page__cert-details">{{ cert.details }}</p>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="corp-section patagonia-bg-alt certifications-page__cta-section">
+  <div class="corp-container certifications-page__cta-wrap">
+    <div class="editorial-card certifications-page__cta-card">
+      <h2 class="certifications-page__cta-title">Partner with a verified exporter</h2>
+      <p class="certifications-page__cta-text">Request compliance documents with your B2B inquiry.</p>
+      <a routerLink="/contact" class="btn-cta-copper certifications-page__cta-button">Contact Export Desk</a>
+    </div>
+  </div>
+</section>

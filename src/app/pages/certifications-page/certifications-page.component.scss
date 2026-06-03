@@ -1,0 +1,71 @@
+.page-hero {
+  @apply border-b border-patagonia-border;
+}
+
+.page-hero__inner {
+  @apply py-16 pt-28;
+}
+
+.certifications-page__credentials {
+  @apply border-b border-patagonia-border;
+}
+
+.certifications-page__gst-grid {
+  @apply mt-10 grid gap-6 md:grid-cols-2;
+}
+
+.certifications-page__number {
+  @apply mt-4 font-mono text-2xl font-semibold text-patagonia-copper;
+}
+
+.certifications-page__note {
+  @apply mt-3 text-sm text-patagonia-taupe/70;
+}
+
+.certifications-page__cert-grid {
+  @apply mt-12 grid gap-6 md:grid-cols-2;
+}
+
+.certifications-page__cert-card {
+  @apply bg-white;
+}
+
+.certifications-page__badge-icon {
+  @apply flex h-14 w-14 items-center justify-center border border-patagonia-border bg-patagonia-cream text-xs font-bold text-patagonia-chocolate;
+}
+
+.certifications-page__cert-title {
+  @apply mt-6 font-display text-lg font-bold text-patagonia-chocolate;
+}
+
+.certifications-page__cert-subtitle {
+  @apply mt-1 text-sm font-semibold text-patagonia-amber;
+}
+
+.certifications-page__cert-details {
+  @apply mt-4 text-sm leading-relaxed text-patagonia-taupe/80;
+}
+
+.certifications-page__cta-section {
+  @apply border-t border-patagonia-border;
+}
+
+.certifications-page__cta-wrap {
+  @apply text-center;
+}
+
+.certifications-page__cta-card {
+  @apply mx-auto max-w-2xl p-12;
+}
+
+.certifications-page__cta-title {
+  @apply font-serif text-3xl font-light text-patagonia-chocolate;
+}
+
+.certifications-page__cta-text {
+  @apply mx-auto mt-4 max-w-lg text-patagonia-taupe/85;
+}
+
+.certifications-page__cta-button {
+  @apply mt-8 inline-flex;
+}

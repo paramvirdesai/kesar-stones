@@ -1,0 +1,11 @@
+<section class="testimonials">
+  <h2 class="testimonials__heading" appRevealOnScroll>Trusted by Designers &amp; Developers</h2>
+  <div class="testimonials__track">
+    @for (quote of quotes; track quote.author; let i = $index) {
+      <article class="testimonials__card" appRevealOnScroll [revealDelay]="i * 80">
+        <p class="testimonials__text">"{{ quote.text }}"</p>
+        <p class="testimonials__author">- {{ quote.author }}</p>
+      </article>
+    }
+  </div>
+</section>

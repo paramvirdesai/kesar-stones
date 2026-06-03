@@ -1,0 +1,9 @@
+// Styles for [appRevealOnScroll] — also defined globally in styles.scss for reuse.
+
+.reveal-base {
+  @apply translate-y-6 opacity-0 ease-luxury transition-all duration-700;
+}
+
+.revealed {
+  @apply translate-y-0 opacity-100;
+}

@@ -10,68 +10,90 @@ export interface ShowcaseCard {
   specs?: string;
 }
 
+export interface GalleryPiece {
+  id: string;
+  layout: 'wide' | 'offset' | 'glow';
+  title: string;
+  subtitle: string;
+  category: string;
+  image: string;
+  specs?: string;
+}
+
 export interface StoryMosaicImage {
   src: string;
   alt: string;
-  span: string;
 }
 
-export const HERO_HEADLINE =
-  'FROM OUR QUARRIES IN INDIA TO THE WORLD: ICONIC STONES.';
+export interface WorkflowStep {
+  step: number;
+  title: string;
+  description: string;
+  location: string;
+}
+
+export interface ComplianceBadge {
+  code: string;
+  title: string;
+  subtitle: string;
+  value?: string;
+  prominent?: boolean;
+}
+
+export const HERO_TITLE_PRIMARY = 'Sourced from the Earth.';
+export const HERO_TITLE_SECONDARY = 'Delivered to the World.';
+export const HERO_TAGLINE = 'From Rajsamand to the Global Horizon.';
+export const HERO_SUBTITLE =
+  'Streamlined export pipelines to the United States, China, and the Middle East — precision quarrying, QA, and port-ready logistics.';
+
+export const STORY_PARAGRAPHS = [
+  'Iconic Stones owns and operates quarry assets in Rajsamand, Rajasthan — supplying granite, marble, quartzite, and engineered programs to distributors and developers across North America, China, and the Middle East.',
+  'We are processors, not brokers. From block extraction and gang-saw processing to resin treatment, QA inspection, and ISPM-15 export crating, every container is documented for B2B procurement teams.',
+  'Our asymmetric supply model pairs finished architectural applications with transparent raw bundle inventory — built for commercial importers who need both specification confidence and wholesale volume.'
+];
 
 export const STORY_MOSAIC: StoryMosaicImage[] = [
   {
     src: SITE_ASSETS.storyQuarryBlocks,
-    alt: 'Quarry floor blocks at Rajsamand extraction site',
-    span: 'col-span-7 row-span-6'
+    alt: 'Quarry floor blocks at Rajsamand extraction site'
   },
   {
     src: SITE_ASSETS.storyCraneRajsamand,
-    alt: 'Heavy crane operating in Rajsamand quarry',
-    span: 'col-span-5 row-span-6'
+    alt: 'Heavy crane operating in Rajsamand quarry'
   }
 ];
 
-export const LUXURY_APPLICATION_CARDS: ShowcaseCard[] = [
+export const GALLERY_SHOWCASE: GalleryPiece[] = [
   {
     id: 'alaska-white-kitchen',
+    layout: 'wide',
     title: 'Alaska White Granite',
     subtitle: 'Premium kitchen countertop application',
     category: 'Finished Application',
     image: SITE_ASSETS.luxuryAlaskaWhiteKitchen,
-    kind: 'application',
     specs: 'Polished slab · Residential & commercial fit-out'
   },
   {
     id: 'commercial-reception',
+    layout: 'offset',
     title: 'Commercial Reception',
-    subtitle: 'High-end B2B hospitality project',
-    category: 'Finished Application',
+    subtitle: 'Luxury bookmatched marble reception desk',
+    category: 'High-End B2B Project',
     image: SITE_ASSETS.luxuryCommercialReception,
-    kind: 'application',
-    specs: 'Bookmatched marble · Flagship interiors'
+    specs: 'Flagship hospitality & corporate interiors'
   },
   {
     id: 'patagonia-backlit',
+    layout: 'glow',
     title: 'Patagonia Quartzite',
     subtitle: 'Backlit architectural feature wall',
-    category: 'Finished Application',
+    category: 'Architectural Feature',
     image: SITE_ASSETS.luxuryPatagoniaBacklit,
-    kind: 'application',
-    specs: 'Translucent quartzite · Architectural lighting'
+    specs: 'Translucent quartzite · Illuminated installation'
   }
 ];
 
-export const RAW_INVENTORY_CARDS: ShowcaseCard[] = [
-  {
-    id: 'fantasy-brown',
-    title: 'Fantasy Brown',
-    subtitle: 'Exotic quartzite texture · bundle grade',
-    category: 'Raw Inventory',
-    image: SITE_ASSETS.rawFantasyBrown,
-    kind: 'raw',
-    specs: 'Rajsamand quarry origin'
-  },
+export const RAW_SLIDER_CARDS: ShowcaseCard[] = [
   {
     id: 'alaskan-white-raw',
     title: 'Alaskan White',
@@ -80,6 +102,15 @@ export const RAW_INVENTORY_CARDS: ShowcaseCard[] = [
     image: SITE_ASSETS.rawAlaskanWhite,
     kind: 'raw',
     specs: 'Export-grade slab stock'
+  },
+  {
+    id: 'fantasy-brown-raw',
+    title: 'Fantasy Brown',
+    subtitle: 'Warm-toned granite bundle program',
+    category: 'Raw Inventory',
+    image: SITE_ASSETS.rawFantasyBrown,
+    kind: 'raw',
+    specs: 'Commercial & hospitality projects'
   },
   {
     id: 'patagonia-commercial',
@@ -102,3 +133,54 @@ export const RAW_INVENTORY_CARDS: ShowcaseCard[] = [
 ];
 
 export const RAW_HOVER_OVERLAY = 'Available for Container Load / Wholesale Export';
+
+export const GST_NUMBER = 'XXAAAAA0000A1Z5';
+export const IEC_NUMBER = 'XXXXXXXXXX';
+
+export const WORKFLOW_STEPS: WorkflowStep[] = [
+  {
+    step: 1,
+    title: 'Rajsamand Quarrying',
+    description: 'Precision quarrying, vein mapping, and block grading at our Rajasthan operations.',
+    location: 'Rajsamand District, India'
+  },
+  {
+    step: 2,
+    title: 'Quality Assurance',
+    description: 'Thickness calibration, finish control, resin treatment, and pre-export inspection.',
+    location: 'Processing & QA Facilities'
+  },
+  {
+    step: 3,
+    title: 'Global Export',
+    description: 'Port programs to USA, China, UAE, and expanding North American distributor networks.',
+    location: 'USA · China · UAE · Canada'
+  }
+];
+
+export const COMPLIANCE_BADGES: ComplianceBadge[] = [
+  {
+    code: 'GST',
+    title: 'GST Registration',
+    subtitle: 'Government of India',
+    value: GST_NUMBER,
+    prominent: true
+  },
+  {
+    code: 'IEC',
+    title: 'Export-Import Code',
+    subtitle: 'DGFT Authorized',
+    value: IEC_NUMBER,
+    prominent: true
+  },
+  {
+    code: 'QA',
+    title: 'Quality Assurance',
+    subtitle: 'Pre-Export Inspection'
+  },
+  {
+    code: 'EXP',
+    title: 'Export Verified',
+    subtitle: 'International Trade Ready'
+  }
+];

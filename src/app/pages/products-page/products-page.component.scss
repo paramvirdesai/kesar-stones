@@ -1,0 +1,75 @@
+.page-hero {
+  @apply border-b border-patagonia-border;
+}
+
+.page-hero__inner {
+  @apply py-16 pt-28;
+}
+
+.products-page__grid {
+  @apply grid gap-6 sm:grid-cols-2 xl:grid-cols-3;
+}
+
+.products-page__card {
+  @apply overflow-hidden;
+}
+
+.products-page__media {
+  @apply relative aspect-[4/3] overflow-hidden;
+}
+
+.products-page__image {
+  @apply h-full w-full object-cover ease-luxury transition-transform duration-700 group-hover:scale-[1.02];
+}
+
+.products-page__placeholder {
+  @apply h-full w-full animate-pulse bg-patagonia-border;
+}
+
+.products-page__overlay {
+  @apply absolute inset-0 flex items-center justify-center bg-patagonia-copper/10 p-4 text-center opacity-0 ease-luxury transition-all duration-700 group-hover:opacity-100;
+}
+
+.products-page__overlay-text {
+  @apply text-[10px] font-semibold uppercase tracking-[0.18em] text-patagonia-chocolate;
+}
+
+.products-page__body {
+  @apply border-t border-patagonia-border p-6;
+}
+
+.products-page__category {
+  @apply text-[10px] font-semibold uppercase tracking-widest text-patagonia-amber;
+}
+
+.products-page__name {
+  @apply mt-2 font-display text-xl font-bold text-patagonia-chocolate;
+}
+
+.products-page__quarry {
+  @apply mt-1 text-xs text-patagonia-taupe/70;
+}
+
+.products-page__desc {
+  @apply mt-2 line-clamp-2 text-sm text-patagonia-taupe/85;
+}
+
+.products-page__cta {
+  @apply mt-6 inline-block;
+}
+
+.products-page__catalog-cta {
+  @apply flex flex-col items-center justify-center border-dashed border-patagonia-copper/30 bg-patagonia-cream/50 p-10 text-center;
+}
+
+.products-page__catalog-count {
+  @apply font-display text-5xl font-light text-patagonia-amber/60;
+}
+
+.products-page__catalog-title {
+  @apply mt-4 font-display text-xl font-bold text-patagonia-chocolate;
+}
+
+.products-page__catalog-desc {
+  @apply mt-3 max-w-xs text-sm text-patagonia-taupe/80;
+}
