@@ -19,11 +19,56 @@
 }
 
 .navbar__tagline {
-  @apply block truncate text-[9px] font-medium uppercase tracking-[0.28em] text-patagonia-amber sm:text-[10px] sm:tracking-[0.32em];
+  @apply block truncate text-[9px] font-semibold uppercase tracking-[0.28em] text-[#4A443F] sm:text-[10px] sm:tracking-[0.32em];
+}
+
+.site-header--hero .navbar__tagline {
+  @apply text-[#4A443F];
 }
 
 .navbar__links {
-  @apply hidden shrink-0 items-center gap-6 md:flex lg:gap-10;
+  @apply hidden shrink-0 items-center gap-5 md:flex lg:gap-8;
+}
+
+.navbar__dropdown {
+  @apply relative;
+}
+
+.navbar__dropdown-trigger {
+  @apply inline-flex items-center gap-1 border-0 bg-transparent p-0;
+}
+
+.navbar__chevron {
+  @apply text-[10px] opacity-70;
+}
+
+.navbar__dropdown-panel {
+  @apply absolute left-0 top-[calc(100%+0.75rem)] z-50 max-h-[70vh] w-[min(90vw,22rem)] overflow-y-auto rounded-sm border border-patagonia-border bg-patagonia-white p-4 shadow-museum-lift;
+
+  @media (min-width: 1024px) {
+    width: 24rem;
+  }
+}
+
+.navbar__dropdown-all {
+  @apply mb-3 block border-b border-patagonia-border pb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-patagonia-copper transition-colors duration-300 hover:text-patagonia-taupe;
+}
+
+.navbar__dropdown-group {
+  @apply mt-3 first:mt-0;
+}
+
+.navbar__dropdown-heading {
+  @apply block text-[10px] font-bold uppercase tracking-[0.22em] text-patagonia-taupe transition-colors duration-300 hover:text-patagonia-copper;
+}
+
+.navbar__dropdown-list {
+  @apply mt-2 space-y-1 pl-0;
+  list-style: none;
+}
+
+.navbar__dropdown-item {
+  @apply block py-1 text-xs text-patagonia-taupe/80 transition-colors duration-300 hover:text-patagonia-copper;
 }
 
 .navbar__cta--desktop {

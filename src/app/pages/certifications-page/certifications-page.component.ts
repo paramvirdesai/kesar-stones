@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { GST_NUMBER, IEC_NUMBER } from '../../data/site.constants';
 
 @Component({
   selector: 'app-certifications-page',
@@ -9,8 +10,8 @@ import { RouterLink } from '@angular/router';
   styleUrl: './certifications-page.component.scss'
 })
 export class CertificationsPageComponent {
-  gstNumber = 'XXAAAAA0000A1Z5';
-  iecNumber = 'XXXXXXXXXX';
+  gstNumber = GST_NUMBER;
+  iecNumber = IEC_NUMBER;
 
   certifications = [
     {

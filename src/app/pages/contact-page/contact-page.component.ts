@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { finalize } from 'rxjs';
+import { CORPORATE_EMAIL } from '../../data/site.constants';
 import { LeadApiService } from '../../services/lead-api.service';
 import { MATERIAL_OPTIONS } from '../../data/products.data';
 
@@ -17,6 +18,7 @@ export class ContactPageComponent implements OnInit {
   loading = false;
   status: 'idle' | 'success' | 'error' = 'idle';
   materialOptions = MATERIAL_OPTIONS;
+  readonly corporateEmail = CORPORATE_EMAIL;
 
   inquiryForm = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(2)]],
@@ -40,6 +42,8 @@ export class ContactPageComponent implements OnInit {
       const match = this.materialOptions.find((o) => o.includes(material));
       if (match) {
         this.inquiryForm.patchValue({ materialInterest: match });
+      } else {
+        this.inquiryForm.patchValue({ materialInterest: material });
       }
     }
   }

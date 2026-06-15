@@ -1,4 +1,5 @@
 import { SITE_ASSETS } from './site-assets';
+import { GST_NUMBER, IEC_NUMBER } from './site.constants';
 
 export interface ShowcaseCard {
   id: string;
@@ -18,6 +19,8 @@ export interface GalleryPiece {
   category: string;
   image: string;
   specs?: string;
+  routeCategory?: string;
+  routeItem?: string;
 }
 
 export interface StoryMosaicImage {
@@ -42,7 +45,6 @@ export interface ComplianceBadge {
 
 export const HERO_TITLE_PRIMARY = 'Sourced from the Earth.';
 export const HERO_TITLE_SECONDARY = 'Delivered to the World.';
-export const HERO_TAGLINE = 'From Rajsamand to the Global Horizon.';
 export const HERO_SUBTITLE =
   'Streamlined export pipelines to the United States, China, and the Middle East — precision quarrying, QA, and port-ready logistics.';
 
@@ -71,7 +73,9 @@ export const GALLERY_SHOWCASE: GalleryPiece[] = [
     subtitle: 'Premium kitchen countertop application',
     category: 'Finished Application',
     image: SITE_ASSETS.luxuryAlaskaWhiteKitchen,
-    specs: 'Polished slab · Residential & commercial fit-out'
+    specs: 'Polished slab · Residential & commercial fit-out',
+    routeCategory: 'granite',
+    routeItem: 'alaska-white'
   },
   {
     id: 'commercial-reception',
@@ -80,7 +84,9 @@ export const GALLERY_SHOWCASE: GalleryPiece[] = [
     subtitle: 'Luxury bookmatched marble reception desk',
     category: 'High-End B2B Project',
     image: SITE_ASSETS.luxuryCommercialReception,
-    specs: 'Flagship hospitality & corporate interiors'
+    specs: 'Flagship hospitality & corporate interiors',
+    routeCategory: 'marble',
+    routeItem: 'makrana-marble'
   },
   {
     id: 'patagonia-backlit',
@@ -89,7 +95,9 @@ export const GALLERY_SHOWCASE: GalleryPiece[] = [
     subtitle: 'Backlit architectural feature wall',
     category: 'Architectural Feature',
     image: SITE_ASSETS.luxuryPatagoniaBacklit,
-    specs: 'Translucent quartzite · Illuminated installation'
+    specs: 'Translucent quartzite · Illuminated installation',
+    routeCategory: 'quartz',
+    routeItem: 'patagonia-quartz'
   }
 ];
 
@@ -134,8 +142,7 @@ export const RAW_SLIDER_CARDS: ShowcaseCard[] = [
 
 export const RAW_HOVER_OVERLAY = 'Available for Container Load / Wholesale Export';
 
-export const GST_NUMBER = 'XXAAAAA0000A1Z5';
-export const IEC_NUMBER = 'XXXXXXXXXX';
+export { GST_NUMBER, IEC_NUMBER } from './site.constants';
 
 export const WORKFLOW_STEPS: WorkflowStep[] = [
   {

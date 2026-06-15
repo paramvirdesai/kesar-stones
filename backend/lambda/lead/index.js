@@ -24,7 +24,7 @@ export const handler = async (event) => {
 
   try {
     const payload = JSON.parse(event.body ?? "{}");
-    const { name, email, company, message } = payload;
+    const { name, email, company, message, recipientEmail } = payload;
 
     if (!name || !email || !company || !message) {
       return response(400, { message: "name, email, company, and message are required." });
@@ -39,6 +39,7 @@ export const handler = async (event) => {
       email: String(email).trim().toLowerCase(),
       company: String(company).trim(),
       message: String(message).trim(),
+      recipientEmail: recipientEmail ? String(recipientEmail).trim().toLowerCase() : "info@theiconicstones.com",
       createdAt: new Date().toISOString()
     };
 

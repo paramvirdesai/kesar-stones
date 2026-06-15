@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LogoComponent } from '../logo/logo.component';
+import { CORPORATE_EMAIL } from '../../data/site.constants';
 
 @Component({
   selector: 'app-footer',
@@ -10,5 +11,6 @@ import { LogoComponent } from '../logo/logo.component';
   styleUrl: './footer.component.scss'
 })
 export class FooterComponent {
-  year = new Date().getFullYear();
+  readonly year = new Date().getFullYear();
+  readonly corporateEmail = CORPORATE_EMAIL;
 }

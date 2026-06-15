@@ -21,7 +21,7 @@
     <div>
       <p class="corp-eyebrow">Company</p>
       <ul class="footer__list">
-        <li><a routerLink="/products" class="footer__link">Stone Collections</a></li>
+        <li><a routerLink="/collections" class="footer__link">Stone Collections</a></li>
         <li><a routerLink="/certifications" class="footer__link">Certifications</a></li>
         <li><a routerLink="/about" class="footer__link">About Us</a></li>
       </ul>
@@ -30,7 +30,7 @@
       <p class="corp-eyebrow">Export Desk</p>
       <ul class="footer__list">
         <li>
-          <a href="mailto:info@theexoticstones.com" class="text-email-accent">info&#64;theexoticstones.com</a>
+          <a [href]="'mailto:' + corporateEmail" class="text-email-accent">{{ corporateEmail }}</a>
         </li>
         <li>+1 (USA) · +91 (India)</li>
         <li>Rajsamand, Rajasthan, India</li>

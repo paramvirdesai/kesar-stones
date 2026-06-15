@@ -19,8 +19,8 @@
       <div class="editorial-card contact-page__info">
         <div>
           <p class="corp-eyebrow">Email</p>
-          <a href="mailto:info@theexoticstones.com" class="text-email-accent mt-2 block text-lg">
-            info&#64;theexoticstones.com
+          <a [href]="'mailto:' + corporateEmail" class="text-email-accent mt-2 block text-lg">
+            {{ corporateEmail }}
           </a>
         </div>
         <div class="contact-page__info-row">
@@ -92,7 +92,7 @@
       }
       @if (status === 'error') {
         <p class="contact-page__message contact-page__message--error">
-          Submission failed. Email info&#64;theexoticstones.com or retry shortly.
+          Submission failed. Email {{ corporateEmail }} or retry shortly.
         </p>
       }
     </form>

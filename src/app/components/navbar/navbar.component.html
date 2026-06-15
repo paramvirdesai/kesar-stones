@@ -9,15 +9,66 @@
     </a>
 
     <div class="navbar__links">
-      @for (link of navLinks; track link.path) {
-        <a
-          [routerLink]="link.path"
-          routerLinkActive="nav-link--active"
-          [routerLinkActiveOptions]="link.exact ? { exact: true } : undefined"
-          class="nav-link nav-link--light"
+      <a
+        routerLink="/"
+        routerLinkActive="nav-link--active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="nav-link nav-link--light"
+      >
+        Home
+      </a>
+
+      <div class="navbar__dropdown" [class.navbar__dropdown--open]="collectionsOpen">
+        <button
+          type="button"
+          class="nav-link nav-link--light navbar__dropdown-trigger"
+          [class.nav-link--active]="isCollectionsRoute || collectionsOpen"
+          (click)="toggleCollections()"
+          [attr.aria-expanded]="collectionsOpen"
+          aria-haspopup="true"
         >
-          {{ link.label }}
-        </a>
+          Collections
+          <span class="navbar__chevron" aria-hidden="true">▾</span>
+        </button>
+
+        @if (collectionsOpen) {
+          <div class="navbar__dropdown-panel" role="menu">
+            <a routerLink="/collections" class="navbar__dropdown-all" (click)="closeCollections()">View all collections</a>
+            @for (cat of categories; track cat.id) {
+              <div class="navbar__dropdown-group">
+                <a [routerLink]="['/collections', cat.id]" class="navbar__dropdown-heading" (click)="closeCollections()">
+                  {{ cat.label }}
+                </a>
+                <ul class="navbar__dropdown-list">
+                  @for (item of itemsForCategory(cat.id); track item.id) {
+                    <li>
+                      <a
+                        [routerLink]="['/collections', item.category, item.id]"
+                        class="navbar__dropdown-item"
+                        (click)="closeCollections()"
+                      >
+                        {{ item.name }}
+                      </a>
+                    </li>
+                  }
+                </ul>
+              </div>
+            }
+          </div>
+        }
+      </div>
+
+      @for (link of navLinks; track link.path) {
+        @if (link.path !== '/') {
+          <a
+            [routerLink]="link.path"
+            routerLinkActive="nav-link--active"
+            [routerLinkActiveOptions]="link.exact ? { exact: true } : undefined"
+            class="nav-link nav-link--light"
+          >
+            {{ link.label }}
+          </a>
+        }
       }
     </div>
 

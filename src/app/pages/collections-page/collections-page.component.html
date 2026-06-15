@@ -1,0 +1,59 @@
+<section class="page-hero patagonia-bg">
+  <div class="corp-container page-hero__inner">
+    <p class="corp-eyebrow">Stone Collections</p>
+    <h1 class="heading-serif mt-4">Export-grade materials catalog</h1>
+    <p class="body-text mt-6 max-w-2xl">
+      Browse marble, granite, and quartz programs — quarry-direct inventory photographed for B2B procurement teams.
+    </p>
+  </div>
+</section>
+
+<section class="corp-section patagonia-bg-alt">
+  <div class="corp-container">
+    <nav class="collections-tabs" aria-label="Material categories">
+      <a
+        routerLink="/collections"
+        class="collections-tabs__link"
+        [class.collections-tabs__link--active]="!activeCategory"
+        routerLinkActive="collections-tabs__link--active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        All
+      </a>
+      @for (cat of categories; track cat.id) {
+        <a
+          [routerLink]="['/collections', cat.id]"
+          class="collections-tabs__link"
+          [class.collections-tabs__link--active]="activeCategory === cat.id"
+          routerLinkActive="collections-tabs__link--active"
+        >
+          {{ cat.label }}
+        </a>
+      }
+    </nav>
+
+    @if (activeCategory) {
+      @for (cat of categories; track cat.id) {
+        @if (cat.id === activeCategory) {
+          <p class="body-text mt-6 max-w-2xl">{{ cat.description }}</p>
+        }
+      }
+    }
+
+    <div class="collections-grid">
+      @for (item of items; track item.id) {
+        <a [routerLink]="['/collections', item.category, item.id]" class="group collections-card">
+          <div class="collections-card__media">
+            <img [src]="item.thumbnail" [alt]="item.name" class="collections-card__img" loading="lazy" decoding="async" />
+          </div>
+          <div class="collections-card__body">
+            <p class="corp-eyebrow">{{ categoryLabel(item.category) }}</p>
+            <h2 class="heading-display mt-2 text-lg">{{ item.name }}</h2>
+            <p class="body-text mt-1">{{ item.quarry }}</p>
+            <span class="link-editorial mt-4 inline-block">View details →</span>
+          </div>
+        </a>
+      }
+    </div>
+  </div>
+</section>

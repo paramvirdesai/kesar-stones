@@ -1,0 +1,144 @@
+@if (item) {
+  <article class="item-page">
+    <div class="corp-container item-page__container">
+      <button type="button" class="item-page__back" (click)="location.back()">
+        <span aria-hidden="true">←</span> Back to collections
+      </button>
+
+      <header class="item-page__header">
+        <p class="corp-eyebrow">{{ item.category }}</p>
+        <h1 class="heading-display mt-3">{{ item.name }}</h1>
+        <p class="body-text mt-2">{{ item.quarry }}</p>
+      </header>
+
+      <div class="item-page__carousel" aria-roledescription="carousel" [attr.aria-label]="item.name + ' gallery'">
+        <div class="item-page__carousel-track">
+          @for (slide of item.carousel; track slide; let i = $index) {
+            <img
+              [src]="slide"
+              [alt]="item.name + ' — view ' + (i + 1)"
+              class="item-page__carousel-slide"
+              [class.item-page__carousel-slide--active]="i === activeSlide"
+              loading="lazy"
+              decoding="async"
+            />
+          }
+        </div>
+        @if (item.carousel.length > 1) {
+          <button type="button" class="item-page__carousel-btn item-page__carousel-btn--prev" (click)="prevSlide()" aria-label="Previous image">
+            ‹
+          </button>
+          <button type="button" class="item-page__carousel-btn item-page__carousel-btn--next" (click)="nextSlide()" aria-label="Next image">
+            ›
+          </button>
+          <div class="item-page__carousel-dots">
+            @for (slide of item.carousel; track slide; let i = $index) {
+              <button
+                type="button"
+                class="item-page__dot"
+                [class.item-page__dot--active]="i === activeSlide"
+                (click)="goToSlide(i)"
+                [attr.aria-label]="'Go to image ' + (i + 1)"
+              ></button>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="item-page__editorial">
+        <h2 class="heading-display text-xl sm:text-2xl">Quarry &amp; pattern character</h2>
+        <p class="body-text mt-4 max-w-3xl">{{ item.editorial }}</p>
+      </div>
+
+      <div class="item-page__accordions">
+        <section class="item-accordion border-t border-patagonia-taupe/10">
+          <button type="button" class="item-accordion__trigger" (click)="toggleSpecs()" [attr.aria-expanded]="specsOpen">
+            <span>Specifications</span>
+            <span class="item-accordion__icon" [class.item-accordion__icon--open]="specsOpen">+</span>
+          </button>
+          @if (specsOpen) {
+            <div class="item-accordion__panel">
+              <table class="item-specs">
+                <tbody>
+                  <tr>
+                    <th scope="row">Thickness Options</th>
+                    <td>{{ item.specs.thicknessOptions }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Primary Base Color</th>
+                    <td>{{ item.specs.primaryBaseColor }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Material Composition</th>
+                    <td>{{ item.specs.materialComposition }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Quality Grade</th>
+                    <td>{{ item.specs.qualityGrade }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          }
+        </section>
+
+        <section class="item-accordion border-t border-b border-patagonia-taupe/10">
+          <button type="button" class="item-accordion__trigger" (click)="toggleInquiry()" [attr.aria-expanded]="inquiryOpen">
+            <span>Product Inquiry</span>
+            <span class="item-accordion__icon" [class.item-accordion__icon--open]="inquiryOpen">+</span>
+          </button>
+          @if (inquiryOpen) {
+            <div class="item-accordion__panel">
+              <p class="body-text mb-6">
+                Inquiry for <strong>{{ item.name }}</strong> routes to our export desk at
+                <a [href]="'mailto:' + corporateEmail" class="link-editorial">{{ corporateEmail }}</a>.
+              </p>
+              <form [formGroup]="inquiryForm" (ngSubmit)="submitInquiry()" novalidate>
+                <div class="space-y-6">
+                  <div class="float-field-minimal">
+                    <input id="item-name" class="peer float-input-minimal" formControlName="name" placeholder=" " autocomplete="name" [class.form-invalid]="formSubmitted && inquiryForm.get('name')?.invalid" />
+                    <label class="float-label-minimal" for="item-name">Full Name *</label>
+                  </div>
+                  <div class="float-field-minimal">
+                    <input id="item-email" type="email" class="peer float-input-minimal" formControlName="email" placeholder=" " autocomplete="email" [class.form-invalid]="formSubmitted && inquiryForm.get('email')?.invalid" />
+                    <label class="float-label-minimal" for="item-email">Business Email *</label>
+                  </div>
+                  <div class="float-field-minimal">
+                    <input id="item-company" class="peer float-input-minimal" formControlName="company" placeholder=" " autocomplete="organization" [class.form-invalid]="formSubmitted && inquiryForm.get('company')?.invalid" />
+                    <label class="float-label-minimal" for="item-company">Company *</label>
+                  </div>
+                  <div class="float-field-minimal">
+                    <textarea id="item-message" class="peer float-input-minimal min-h-[120px] resize-none" rows="4" formControlName="message" placeholder=" " [class.form-invalid]="formSubmitted && inquiryForm.get('message')?.invalid"></textarea>
+                    <label class="float-label-minimal" for="item-message">Project Details *</label>
+                  </div>
+                </div>
+                <button type="submit" class="btn-cta-copper mt-8 w-full" [disabled]="formLoading">
+                  {{ formLoading ? 'Submitting…' : 'Submit Product Inquiry' }}
+                </button>
+                @if (formSubmitted && inquiryForm.invalid) {
+                  <p class="form-message form-message--invalid" role="alert">Please complete all required fields.</p>
+                }
+                @if (formStatus === 'success') {
+                  <p class="form-message form-message--success" role="status">Inquiry received. Our export desk will respond shortly.</p>
+                }
+                @if (formStatus === 'error') {
+                  <p class="form-message form-message--invalid" role="alert">
+                    Submission failed. Email <a [href]="'mailto:' + corporateEmail">{{ corporateEmail }}</a> directly.
+                  </p>
+                }
+              </form>
+            </div>
+          }
+        </section>
+      </div>
+    </div>
+  </article>
+} @else {
+  <section class="corp-section patagonia-bg">
+    <div class="corp-container text-center">
+      <h1 class="heading-display">Collection item not found</h1>
+      <p class="body-text mt-4">This stone variety is not in our catalog.</p>
+      <a routerLink="/collections" class="btn-cta-copper mt-8 inline-flex">View all collections</a>
+    </div>
+  </section>
+}

@@ -141,18 +141,23 @@
   }
 
   .trust-tile {
-    @apply block rounded-sm border border-patagonia-border bg-white p-8 text-left shadow-editorial ease-luxury transition-[transform,box-shadow] duration-300;
+    @apply block rounded-sm border border-patagonia-border bg-white p-8 text-left shadow-editorial transition-[transform,border-color,box-shadow] duration-300 hover:border-[#EB8B7C]/40;
   }
 
   @media (hover: hover) and (pointer: fine) {
     .trust-tile:hover {
-      transform: translateY(-4px) scale(1.01);
+      transform: translateY(-4px);
       box-shadow: 0 32px 80px rgba(74, 68, 63, 0.14), 0 12px 32px rgba(74, 68, 63, 0.08);
     }
   }
 
-  .trust-tile--prominent {
-    @apply hover:ring-2 hover:ring-patagonia-copper/30;
+  .form-invalid {
+    border-color: rgb(235 139 124 / 0.55) !important;
+  }
+
+  .float-input.ng-touched.ng-invalid,
+  .float-select.ng-touched.ng-invalid {
+    @apply border-patagonia-copper/45;
   }
 
   .cert-badge {
@@ -246,7 +251,7 @@
   }
 
   .float-input.ng-touched.ng-invalid {
-    @apply border-red-300/80;
+    @apply border-patagonia-copper/45;
   }
 
   .float-label {
@@ -258,7 +263,7 @@
   }
 
   .float-select.ng-touched.ng-invalid {
-    @apply border-red-300/80;
+    @apply border-patagonia-copper/45;
   }
 
   .float-field-minimal {
@@ -270,7 +275,7 @@
   }
 
   .float-input-minimal.ng-touched.ng-invalid {
-    @apply border-red-400/50;
+    @apply border-patagonia-copper/45;
   }
 
   .float-label-minimal {

@@ -18,16 +18,15 @@
 
   <div class="home-hero__content relative z-10">
     <div class="home-hero__inner">
-      <p class="corp-eyebrow home-hero__fade home-hero__fade--1 mb-4 sm:mb-6">{{ heroTagline }}</p>
-      <h1 class="heading-cinematic home-hero__fade home-hero__fade--2">
+      <h1 class="heading-cinematic home-hero__fade home-hero__fade--1">
         {{ heroTitlePrimary }}<br />
         <span class="text-patagonia-chocolate">{{ heroTitleSecondary }}</span>
       </h1>
-      <p class="home-hero__subtitle mx-auto mt-6 max-w-xl sm:mt-8 home-hero__fade home-hero__fade--3">
+      <p class="home-hero__subtitle mx-auto mt-6 max-w-xl sm:mt-8 home-hero__fade home-hero__fade--2">
         {{ heroSubtitle }}
       </p>
-      <div class="home-hero__actions flex flex-wrap justify-center gap-3 sm:gap-4 home-hero__fade home-hero__fade--4">
-        <a routerLink="/products" class="btn-cta-copper px-6 py-3.5 sm:px-8 sm:py-4">Explore Collections</a>
+      <div class="home-hero__actions flex flex-wrap justify-center gap-3 sm:gap-4 home-hero__fade home-hero__fade--3">
+        <a routerLink="/collections" class="btn-cta-copper px-6 py-3.5 sm:px-8 sm:py-4">Explore Collections</a>
         <a href="#discover" class="btn-ghost-editorial px-6 py-3.5 sm:px-8 sm:py-4">Discover</a>
       </div>
     </div>
@@ -87,7 +86,9 @@
             @if (piece.specs) {
               <p class="mt-3 text-xs uppercase tracking-[0.2em] text-patagonia-amber/80">{{ piece.specs }}</p>
             }
-            <a routerLink="/products" class="link-editorial mt-4 inline-block">View in catalog →</a>
+            @if (piece.routeCategory && piece.routeItem) {
+              <a [routerLink]="['/collections', piece.routeCategory, piece.routeItem]" class="link-editorial mt-4 inline-block">View in catalog →</a>
+            }
           </div>
         </article>
       }
@@ -106,7 +107,7 @@
           Container-ready bundles photographed at quarry and processing — transparent stock for distributor allocation.
         </p>
       </div>
-      <a routerLink="/products" class="link-editorial shrink-0">View full catalog →</a>
+      <a routerLink="/collections" class="link-editorial shrink-0">View full catalog →</a>
     </header>
 
     <div class="raw-slider -mx-4 mt-8 px-4 sm:-mx-0 sm:mt-10 sm:px-0">
@@ -230,7 +231,7 @@
 
     <div class="mt-12 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:mt-14 lg:grid-cols-4">
       @for (badge of complianceBadges; track badge.code) {
-        <article class="trust-tile" [class.trust-tile--prominent]="badge.prominent" appRevealOnScroll [revealDelay]="$index * 70">
+        <article class="trust-tile" appRevealOnScroll [revealDelay]="$index * 70">
           <p class="corp-eyebrow">{{ badge.code }}</p>
           <h3 class="heading-display mt-4 text-lg sm:text-xl">{{ badge.title }}</h3>
           <p class="body-text mt-2">{{ badge.subtitle }}</p>
@@ -267,7 +268,7 @@
             formControlName="name"
             placeholder=" "
             autocomplete="name"
-            [class.home-inquiry__invalid]="formSubmitted && inquiryForm.get('name')?.invalid"
+            [class.form-invalid]="formSubmitted && inquiryForm.get('name')?.invalid"
           />
           <label class="float-label-minimal" for="home-name">Full Name *</label>
         </div>
@@ -279,7 +280,7 @@
             formControlName="email"
             placeholder=" "
             autocomplete="email"
-            [class.home-inquiry__invalid]="formSubmitted && inquiryForm.get('email')?.invalid"
+            [class.form-invalid]="formSubmitted && inquiryForm.get('email')?.invalid"
           />
           <label class="float-label-minimal" for="home-email">Business Email *</label>
         </div>
@@ -289,7 +290,7 @@
             class="peer float-input-minimal"
             formControlName="destinationPort"
             placeholder=" "
-            [class.home-inquiry__invalid]="formSubmitted && inquiryForm.get('destinationPort')?.invalid"
+            [class.form-invalid]="formSubmitted && inquiryForm.get('destinationPort')?.invalid"
           />
           <label class="float-label-minimal" for="home-port">Destination Port *</label>
         </div>
@@ -299,7 +300,7 @@
             id="home-material"
             class="float-select-minimal"
             formControlName="materialInterest"
-            [class.home-inquiry__invalid]="formSubmitted && inquiryForm.get('materialInterest')?.invalid"
+            [class.form-invalid]="formSubmitted && inquiryForm.get('materialInterest')?.invalid"
           >
             <option value="">Select material *</option>
             @for (opt of materialOptions; track opt) {
@@ -314,7 +315,7 @@
             rows="4"
             formControlName="message"
             placeholder=" "
-            [class.home-inquiry__invalid]="formSubmitted && inquiryForm.get('message')?.invalid"
+            [class.form-invalid]="formSubmitted && inquiryForm.get('message')?.invalid"
           ></textarea>
           <label class="float-label-minimal" for="home-message">Project Details *</label>
         </div>
@@ -340,7 +341,7 @@
       @if (formStatus === 'error') {
         <p class="home-inquiry__message home-inquiry__message--error" role="alert">
           Submission failed. Email
-          <a href="mailto:info@theexoticstones.com" class="underline">info&#64;theexoticstones.com</a>
+          <a href="mailto:info@theiconicstones.com" class="underline">info&#64;theiconicstones.com</a>
           directly.
         </p>
       }

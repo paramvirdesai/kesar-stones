@@ -9,7 +9,6 @@ import {
   COMPLIANCE_BADGES,
   GALLERY_SHOWCASE,
   HERO_SUBTITLE,
-  HERO_TAGLINE,
   HERO_TITLE_PRIMARY,
   HERO_TITLE_SECONDARY,
   RAW_HOVER_OVERLAY,
@@ -35,7 +34,6 @@ export class HomePageComponent {
   readonly assets = SITE_ASSETS;
   readonly heroTitlePrimary = HERO_TITLE_PRIMARY;
   readonly heroTitleSecondary = HERO_TITLE_SECONDARY;
-  readonly heroTagline = HERO_TAGLINE;
   readonly heroSubtitle = HERO_SUBTITLE;
   readonly storyParagraphs = STORY_PARAGRAPHS;
   readonly storyMosaic = STORY_MOSAIC;
