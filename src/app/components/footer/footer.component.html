@@ -1,43 +1,108 @@
-<footer class="footer">
-  <div class="corp-container footer__grid">
-    <div>
-      <div class="footer__brand">
-        <app-logo class="text-patagonia-chocolate" />
-        <span class="footer__brand-name">Iconic Stones</span>
-      </div>
-      <p class="footer__blurb">
-        Premium quarry owners &amp; global exporters. USA headquarters · Rajsamand, Rajasthan operations.
-      </p>
-    </div>
-    <div>
-      <p class="corp-eyebrow">Export Markets</p>
-      <ul class="footer__list">
-        <li>North America (Expansion Focus)</li>
-        <li>United States</li>
-        <li>China</li>
-        <li>UAE &amp; Middle East</li>
-      </ul>
-    </div>
-    <div>
-      <p class="corp-eyebrow">Company</p>
-      <ul class="footer__list">
-        <li><a routerLink="/collections" class="footer__link">Stone Collections</a></li>
-        <li><a routerLink="/certifications" class="footer__link">Certifications</a></li>
-        <li><a routerLink="/about" class="footer__link">About Us</a></li>
-      </ul>
-    </div>
-    <div>
-      <p class="corp-eyebrow">Export Desk</p>
-      <ul class="footer__list">
-        <li>
-          <a [href]="'mailto:' + corporateEmail" class="text-email-accent">{{ corporateEmail }}</a>
-        </li>
-        <li>+1 (USA) · +91 (India)</li>
-        <li>Rajsamand, Rajasthan, India</li>
-      </ul>
-    </div>
+<footer class="footer" aria-label="Site footer">
+  <div class="footer__divider" aria-hidden="true">
+    <svg class="footer__divider-svg" viewBox="0 0 1440 32" preserveAspectRatio="none">
+      <path class="footer__divider-line" d="M0,16 Q720,4 1440,16" />
+    </svg>
   </div>
-  <div class="footer__legal">
-    © {{ year }} Iconic Stones. All rights reserved.
+
+  <div
+    class="footer__surface"
+    [style.--footer-texture]="'url(' + assets.marbleTexture + ')'"
+    [style.--footer-watermark]="'url(' + assets.tajSilhouette + ')'"
+  >
+    <div class="corp-container footer__inner">
+      <div class="footer__grid">
+        <section class="footer__col" aria-label="Brand identity">
+          <h2 class="footer__heading">Iconic Stones</h2>
+          <p class="footer__blurb">
+            Premium quarry owners and global exporters of natural stones. Houston, TX, USA headquarters · Rajsamand quarry
+            operations.
+          </p>
+          <p class="footer__tagline">Global Stone Export</p>
+        </section>
+
+        <section class="footer__col" aria-label="Export markets">
+          <h2 class="footer__heading">Export Markets</h2>
+          <ul class="footer__list">
+            <li>North America (Expansion Focus)</li>
+            <li>China</li>
+            <li>UAE &amp; Middle East</li>
+          </ul>
+        </section>
+
+        <section class="footer__col" aria-label="Company">
+          <h2 class="footer__heading">Company</h2>
+          <ul class="footer__list">
+            <li><a routerLink="/collections" class="footer__link">Stone Collections</a></li>
+            <li><a routerLink="/certifications" class="footer__link">Certifications</a></li>
+            <li><a routerLink="/about" class="footer__link">About Us</a></li>
+            <li><a routerLink="/contact" class="footer__link">Request a Quote</a></li>
+          </ul>
+        </section>
+
+        <section class="footer__col" aria-label="Export desk">
+          <h2 class="footer__heading">Export Desk</h2>
+          <div class="footer__contact">
+            <div class="footer__contact-block">
+              <h3 class="footer__subheading">USA &amp; Canada</h3>
+              <p class="footer__contact-detail">
+                @for (phone of usaPhones; track phone.e164; let last = $last) {
+                  <a [href]="'tel:' + phone.e164" class="footer__link">{{ phone.display }}</a>@if (!last) {<span>, </span>}
+                }
+              </p>
+            </div>
+
+            <div class="footer__contact-block">
+              <h3 class="footer__subheading">India</h3>
+              <p class="footer__contact-detail">
+                @for (phone of indiaPhones; track phone.e164; let last = $last) {
+                  <a [href]="'tel:' + phone.e164" class="footer__link">{{ phone.display }}</a>@if (!last) {<span>, </span>}
+                }
+              </p>
+            </div>
+
+            <div class="footer__contact-block">
+              <h3 class="footer__subheading">Headquarters</h3>
+              <p class="footer__contact-detail">Houston, TX, USA</p>
+            </div>
+
+            <div class="footer__contact-block">
+              <h3 class="footer__subheading">Quarry Operations</h3>
+              <p class="footer__contact-detail">Rajsamand, Rajasthan, India</p>
+            </div>
+
+            <div class="footer__contact-block">
+              <h3 class="footer__subheading">Email</h3>
+              <p class="footer__contact-detail">
+                <a [href]="'mailto:' + corporateEmail" class="footer__link">{{ corporateEmail }}</a>
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="footer__meta">
+        <p class="footer__meta-line">
+          <span>Operating globally under Iconic Stones LLC</span>
+          <span class="footer__meta-sep" aria-hidden="true">|</span>
+          <a
+            class="footer__social"
+            [href]="instagramUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Follow Iconic Stones on Instagram"
+          >
+            <svg class="footer__social-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5" />
+              <circle cx="12" cy="12" r="4.25" stroke="currentColor" stroke-width="1.5" />
+              <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" />
+            </svg>
+            <span>&#64;ICONIC__STONES</span>
+          </a>
+          <span class="footer__meta-sep" aria-hidden="true">|</span>
+          <span>© {{ year }} Iconic Stones. All rights reserved.</span>
+        </p>
+      </div>
+    </div>
   </div>
 </footer>

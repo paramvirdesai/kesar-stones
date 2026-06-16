@@ -6,7 +6,10 @@
   "scripts": {
     "start": "ng serve",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development"
+    "watch": "ng build --watch --configuration development",
+    "backend:install": "npm install --prefix backend/lambda/lead",
+    "backend:build": "cd backend && sam build",
+    "backend:deploy": "cd backend && sam build && sam deploy"
   },
   "keywords": [
     "angular",

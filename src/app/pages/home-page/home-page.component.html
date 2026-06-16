@@ -2,7 +2,7 @@
 <section class="home-hero relative overflow-hidden bg-patagonia-cream" aria-label="Hero">
   <div class="home-hero__bg absolute inset-0" aria-hidden="true">
     <img
-      [src]="assets.heroQuarryPanorama"
+      [src]="assets.heroQuarry"
       alt=""
       class="home-hero__pan h-full w-full object-cover"
       fetchpriority="high"
@@ -11,14 +11,11 @@
       height="1080"
     />
   </div>
-  <div
-    class="home-hero__overlay pointer-events-none absolute inset-0 bg-gradient-to-b from-patagonia-cream/25 via-patagonia-cream/55 to-patagonia-cream"
-    aria-hidden="true"
-  ></div>
+  <div class="home-hero__overlay pointer-events-none absolute inset-0" aria-hidden="true"></div>
 
   <div class="home-hero__content relative z-10">
     <div class="home-hero__inner">
-      <h1 class="heading-cinematic home-hero__fade home-hero__fade--1">
+      <h1 class="heading-cinematic home-hero__title home-hero__fade home-hero__fade--1">
         {{ heroTitlePrimary }}<br />
         <span class="text-patagonia-chocolate">{{ heroTitleSecondary }}</span>
       </h1>
@@ -26,109 +23,96 @@
         {{ heroSubtitle }}
       </p>
       <div class="home-hero__actions flex flex-wrap justify-center gap-3 sm:gap-4 home-hero__fade home-hero__fade--3">
-        <a routerLink="/collections" class="btn-cta-copper px-6 py-3.5 sm:px-8 sm:py-4">Explore Collections</a>
-        <a href="#discover" class="btn-ghost-editorial px-6 py-3.5 sm:px-8 sm:py-4">Discover</a>
+        <a href="#wholesale-program" class="btn-cta-copper px-6 py-3.5 sm:px-8 sm:py-4">Wholesale Program</a>
+        <a href="#featured-collections" class="btn-ghost-editorial px-6 py-3.5 sm:px-8 sm:py-4">Featured Work</a>
       </div>
     </div>
   </div>
 
   <div class="home-hero__scroll relative z-10">
-    <a href="#discover" class="scroll-indicator" aria-label="Scroll to featured collections">
+    <a href="#wholesale-program" class="scroll-indicator" aria-label="Scroll to wholesale inventory">
       <span class="scroll-indicator__line" aria-hidden="true"></span>
-      <span class="mt-3 text-[10px] font-semibold uppercase tracking-[0.32em] text-patagonia-taupe/50">Scroll</span>
+      <span class="mt-3 text-[10px] font-semibold uppercase tracking-[0.32em] text-patagonia-taupe/60">Scroll</span>
     </a>
   </div>
 </section>
 
-<!-- ═══ FEATURED COLLECTIONS ═══ -->
-<section id="discover" class="corp-section patagonia-bg scroll-section" aria-labelledby="discover-heading">
+<!-- ═══ WHOLESALE INVENTORY & RAW SLABS ═══ -->
+<section
+  id="wholesale-program"
+  class="corp-section patagonia-bg-alt scroll-section home-wholesale"
+  aria-labelledby="wholesale-heading"
+>
   <div class="corp-container">
     <header class="section-header mx-auto max-w-3xl text-center" appRevealOnScroll>
-      <p class="corp-eyebrow">Featured Collections</p>
-      <h2 id="discover-heading" class="heading-display mt-4">
-        Museum-grade stone.<br class="hidden sm:block" />Architectural scale.
-      </h2>
-      <p class="body-text mx-auto mt-6 max-w-2xl">
-        Finished applications and flagship installations — the specification confidence your clients expect from a
-        quarry-direct export partner.
-      </p>
+      <p class="corp-eyebrow">{{ wholesaleCopy.eyebrow }}</p>
+      <h2 id="wholesale-heading" class="heading-display mt-4">{{ wholesaleCopy.title }}</h2>
+      <p class="body-text mx-auto mt-6 max-w-2xl">{{ wholesaleCopy.lead }}</p>
+      <p class="body-text mx-auto mt-4 max-w-2xl text-patagonia-taupe/75">{{ wholesaleCopy.body }}</p>
     </header>
 
-    <div class="gallery-mosaic">
-      @for (piece of galleryShowcase; track piece.id) {
-        <article
-          class="group museum-card gallery-mosaic__card"
-          [class.gallery-mosaic__card--wide]="piece.layout === 'wide'"
-          [class.gallery-mosaic__card--offset]="piece.layout === 'offset'"
-          [class.gallery-mosaic__card--glow]="piece.layout === 'glow'"
-          appRevealOnScroll
-          [revealDelay]="$index * 80"
-        >
-          @if (piece.layout === 'glow') {
-            <div class="glow-frame__inner gallery-mosaic__media gallery-mosaic__media--glow">
-              <img [src]="piece.image" [alt]="piece.title" class="gallery-mosaic__img" loading="lazy" decoding="async" />
-            </div>
-          } @else {
-            <div
-              class="gallery-mosaic__media museum-card__media"
-              [class.gallery-mosaic__media--wide]="piece.layout === 'wide'"
-              [class.gallery-mosaic__media--offset]="piece.layout === 'offset'"
-            >
-              <img [src]="piece.image" [alt]="piece.title" class="gallery-mosaic__img" loading="lazy" decoding="async" />
-            </div>
+    <div class="home-wholesale__ticker-wrap home-wholesale__ticker-wrap--mobile mt-12 sm:mt-14" appRevealOnScroll [revealDelay]="80">
+      <p class="home-wholesale__scroll-hint">Swipe to browse raw slab inventory</p>
+      <div class="home-wholesale__ticker home-wholesale__ticker--scroll" aria-label="Wholesale raw slab inventory, swipeable">
+        <div class="home-wholesale__track home-wholesale__track--scroll">
+          @for (item of wholesaleTickerItems; track item.id) {
+            <article class="home-wholesale__slide home-wholesale__slide--mobile">
+              <a
+                class="home-wholesale__slide-media"
+                [routerLink]="['/collections', item.routeCategory, item.routeItem]"
+                [attr.aria-label]="'View ' + item.title + ' collection'"
+              >
+                <img [src]="item.image" [alt]="item.title + ' raw slab'" loading="lazy" decoding="async" />
+              </a>
+              <div class="home-wholesale__slide-copy">
+                <h3 class="home-wholesale__slide-title">{{ item.title }}</h3>
+                <p class="home-wholesale__slide-specs">{{ item.origin }}</p>
+                <a
+                  [routerLink]="['/collections', item.routeCategory, item.routeItem]"
+                  class="home-wholesale__slide-cta home-wholesale__slide-cta--mobile"
+                >
+                  View Collection
+                </a>
+              </div>
+            </article>
           }
-          <div class="museum-card__caption p-5 sm:p-6" [ngClass]="{ 'md:p-8': piece.layout === 'wide' }">
-            <p class="corp-eyebrow">{{ piece.category }}</p>
-            <h3 class="heading-display mt-2" [class.text-xl]="piece.layout !== 'wide'" [class.sm:text-2xl]="piece.layout === 'wide'" [class.md:text-3xl]="piece.layout === 'wide'">
-              {{ piece.title }}
-            </h3>
-            <p class="body-text mt-2">{{ piece.subtitle }}</p>
-            @if (piece.specs) {
-              <p class="mt-3 text-xs uppercase tracking-[0.2em] text-patagonia-amber/80">{{ piece.specs }}</p>
-            }
-            @if (piece.routeCategory && piece.routeItem) {
-              <a [routerLink]="['/collections', piece.routeCategory, piece.routeItem]" class="link-editorial mt-4 inline-block">View in catalog →</a>
-            }
-          </div>
-        </article>
-      }
-    </div>
-  </div>
-</section>
-
-<!-- ═══ RAW INVENTORY ═══ -->
-<section class="corp-section patagonia-bg-alt scroll-section" aria-labelledby="raw-heading">
-  <div class="corp-container">
-    <header class="section-header flex flex-col gap-6 md:flex-row md:items-end md:justify-between" appRevealOnScroll>
-      <div>
-        <p class="corp-eyebrow">Wholesale Inventory</p>
-        <h2 id="raw-heading" class="heading-display mt-4">Raw slab programs</h2>
-        <p class="body-text mt-4 max-w-xl">
-          Container-ready bundles photographed at quarry and processing — transparent stock for distributor allocation.
-        </p>
+        </div>
       </div>
-      <a routerLink="/collections" class="link-editorial shrink-0">View full catalog →</a>
-    </header>
+    </div>
 
-    <div class="raw-slider -mx-4 mt-8 px-4 sm:-mx-0 sm:mt-10 sm:px-0">
-      @for (card of rawSliderCards; track card.id) {
-        <article class="group raw-slider__card" appRevealOnScroll [revealDelay]="$index * 60">
-          <div class="museum-card__media relative aspect-[3/4]">
-            <img [src]="card.image" [alt]="card.title" class="h-full w-full object-cover" loading="lazy" decoding="async" />
-            <div class="raw-slider__overlay">
-              <p class="text-xs font-semibold uppercase tracking-[0.22em] text-patagonia-taupe">{{ rawHoverOverlay }}</p>
-            </div>
-          </div>
-          <div class="p-5">
-            <p class="corp-eyebrow">{{ card.category }}</p>
-            <h3 class="heading-display mt-2 text-lg">{{ card.title }}</h3>
-            <p class="body-text mt-1">{{ card.subtitle }}</p>
-            @if (card.specs) {
-              <p class="mt-3 text-[10px] uppercase tracking-[0.2em] text-patagonia-amber/80">{{ card.specs }}</p>
-            }
-          </div>
-        </article>
-      }
+    <div class="home-wholesale__ticker-wrap home-wholesale__ticker-wrap--desktop mt-12 sm:mt-14" appRevealOnScroll [revealDelay]="80">
+      <div class="home-wholesale__ticker home-wholesale__ticker--marquee" aria-label="Wholesale raw slab inventory carousel">
+        <div class="home-wholesale__track home-wholesale__track--marquee">
+          @for (item of wholesaleTickerLoop; track item.id) {
+            <article class="home-wholesale__slide">
+              <a
+                class="home-wholesale__slide-media"
+                [routerLink]="['/collections', item.routeCategory, item.routeItem]"
+                [attr.aria-label]="'View ' + item.title + ' collection'"
+              >
+                <img [src]="item.image" [alt]="item.title + ' raw slab'" loading="lazy" decoding="async" />
+              </a>
+              <div class="home-wholesale__slide-copy">
+                <p class="home-wholesale__slide-eyebrow">{{ item.bundleLabel }}</p>
+                <h3 class="home-wholesale__slide-title">{{ item.title }}</h3>
+                <p class="home-wholesale__slide-sub">{{ item.subtitle }}</p>
+                <p class="home-wholesale__slide-specs">{{ item.origin }}</p>
+                <p class="home-wholesale__slide-export">{{ item.exportNote }}</p>
+                <a
+                  [routerLink]="['/collections', item.routeCategory, item.routeItem]"
+                  class="home-wholesale__slide-cta"
+                >
+                  View Collection
+                </a>
+              </div>
+            </article>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-10 text-center">
+      <a routerLink="/collections" class="link-editorial">Explore full material catalog →</a>
     </div>
   </div>
 </section>
@@ -148,17 +132,18 @@
         <a routerLink="/about" class="link-editorial mt-8 inline-block">Read corporate profile →</a>
       </div>
 
-      <div class="home-story__grid md:col-span-7">
+      <div class="home-story__collage md:col-span-7">
         @for (img of storyMosaic; track img.src; let i = $index) {
-          <div
-            class="home-story__tile rounded-sm border border-patagonia-border/80 shadow-editorial"
-            [class.home-story__tile--primary]="i === 0"
-            [class.home-story__tile--secondary]="i === 1"
+          <figure
+            class="home-story__frame"
+            [class.home-story__frame--hero]="img.layout === 'hero'"
+            [class.home-story__frame--accent]="img.layout === 'accent'"
+            [class.home-story__frame--detail]="img.layout === 'detail'"
             appRevealOnScroll
-            [revealDelay]="i * 100"
+            [revealDelay]="i * 110"
           >
-            <img [src]="img.src" [alt]="img.alt" class="h-full min-h-[200px] w-full object-cover md:min-h-0" loading="lazy" decoding="async" />
-          </div>
+            <img [src]="img.src" [alt]="img.alt" loading="lazy" decoding="async" />
+          </figure>
         }
       </div>
     </div>
@@ -259,7 +244,14 @@
       </p>
     </header>
 
-    <form class="home-inquiry mx-auto mt-10 max-w-2xl sm:mt-12" [formGroup]="inquiryForm" (ngSubmit)="submitInquiry()" appRevealOnScroll [revealDelay]="100" novalidate>
+    <form
+      class="home-inquiry mx-auto mt-10 max-w-2xl sm:mt-12"
+      [formGroup]="inquiryForm"
+      (ngSubmit)="submitInquiry()"
+      appRevealOnScroll
+      [revealDelay]="100"
+      novalidate
+    >
       <div class="space-y-7 sm:space-y-8">
         <div class="float-field-minimal">
           <input
@@ -346,5 +338,56 @@
         </p>
       }
     </form>
+  </div>
+</section>
+
+<!-- ═══ FEATURED COLLECTIONS ═══ -->
+<section
+  id="featured-collections"
+  class="corp-section patagonia-bg scroll-section home-featured"
+  aria-labelledby="featured-heading"
+>
+  <div class="corp-container">
+    <header class="section-header mx-auto max-w-3xl text-center" appRevealOnScroll>
+      <p class="corp-eyebrow">Featured Collections</p>
+      <h2 id="featured-heading" class="heading-display mt-4">From quarry block to built environment</h2>
+      <p class="body-text mx-auto mt-6 max-w-2xl">
+        Specification reference — finished applications demonstrating how our slabs read at architectural scale for
+        fabricators, architects, and procurement teams.
+      </p>
+    </header>
+
+    <div class="featured-grid">
+      @for (item of featuredCollections; track item.id; let i = $index) {
+        <a
+          [routerLink]="['/collections', item.category, item.slug]"
+          class="featured-card group"
+          [class.featured-card--hero]="item.layout === 'hero'"
+          [class.featured-card--tall]="item.layout === 'tall'"
+          [class.featured-card--wide]="item.layout === 'wide'"
+          [class.featured-card--accent]="item.layout === 'accent'"
+          appRevealOnScroll
+          [revealDelay]="i * 90"
+        >
+          <div
+            class="featured-card__frame"
+            [class.featured-card__frame--portrait]="item.aspect === 'portrait'"
+            [class.featured-card__frame--landscape]="item.aspect === 'landscape'"
+          >
+            <img
+              [src]="item.image"
+              [alt]="item.imageAlt"
+              class="featured-card__img"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="featured-card__meta">
+            <h3 class="featured-card__title">{{ item.title }}</h3>
+            <p class="featured-card__application">{{ item.application }}</p>
+          </div>
+        </a>
+      }
+    </div>
   </div>
 </section>

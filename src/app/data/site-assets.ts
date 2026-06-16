@@ -5,7 +5,7 @@
 const asset = (file: string) => `/assets/${file}`;
 
 export const SITE_ASSETS = {
-  heroQuarryPanorama: asset('hero-drone-quarry.jpg'),
+  heroQuarryPanorama: asset('story/quarry.jpg'),
   storyQuarryBlocks: asset('story-quarry-blocks.jpg'),
   storyCraneRajsamand: asset('story-crane.jpg'),
   luxuryAlaskaWhiteKitchen: asset('luxury-alaska-kitchen.jpg'),
@@ -14,6 +14,6 @@ export const SITE_ASSETS = {
   rawFantasyBrown: asset('raw-fantasy-brown.jpg'),
   rawAlaskanWhite: asset('raw-alaskan-white.jpg'),
   rawPatagoniaCommercial: asset('raw-patagonia-commercial.jpg'),
-  rawPatagoniaQuartz: asset('raw-patagonia-quartz.jpg'),
+  rawPatagoniaQuartz: asset('patagonia-quartz.png'),
   workflowLogistics: asset('workflow-logistics.jpg')
 } as const;

@@ -22,6 +22,26 @@
   @apply border-t border-patagonia-border pt-6;
 }
 
+.contact-page__phones {
+  @apply mt-3 flex flex-col gap-4;
+}
+
+.contact-page__phone-group {
+  @apply flex flex-col gap-1;
+}
+
+.contact-page__phone-label {
+  @apply text-[10px] font-semibold uppercase tracking-[0.22em] text-patagonia-taupe/50;
+}
+
+.contact-page__phone-list {
+  @apply flex flex-col gap-1;
+
+  a {
+    @apply text-base text-patagonia-taupe transition-colors duration-200 hover:text-patagonia-copper;
+  }
+}
+
 .contact-page__form {
   @apply p-8 md:p-10 lg:col-span-3;
 }

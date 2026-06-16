@@ -1,6 +1,27 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: Marble granite lead capture backend
+Description: Iconic Stones lead capture — DynamoDB + SES email notifications
+
+Parameters:
+  FromEmail:
+    Type: String
+    Description: Verified SES sender (must match a verified identity in this region)
+    Default: info@theiconicstones.com
+  RecipientEmail:
+    Type: String
+    Description: Inbox that receives lead notification emails
+    Default: info@theiconicstones.com
+
+Globals:
+  Function:
+    Timeout: 15
+    MemorySize: 256
+    Runtime: nodejs18.x
+  Api:
+    Cors:
+      AllowMethods: "'OPTIONS,POST'"
+      AllowHeaders: "'Content-Type'"
+      AllowOrigin: "'*'"
 
 Resources:
   LeadsTable:
@@ -19,17 +40,22 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: marble-granite-lead
-      Runtime: nodejs18.x
       Handler: index.handler
       CodeUri: lambda/lead/
-      Timeout: 10
-      MemorySize: 256
       Environment:
         Variables:
           LEADS_TABLE: !Ref LeadsTable
+          FROM_EMAIL: !Ref FromEmail
+          RECIPIENT_EMAIL: !Ref RecipientEmail
       Policies:
         - DynamoDBCrudPolicy:
             TableName: !Ref LeadsTable
+        - Statement:
+            Effect: Allow
+            Action:
+              - ses:SendEmail
+              - ses:SendRawEmail
+            Resource: !Sub 'arn:aws:ses:${AWS::Region}:${AWS::AccountId}:identity/${FromEmail}'
       Events:
         LeadApi:
           Type: Api
@@ -41,3 +67,11 @@ Resources:
           Properties:
             Path: /lead
             Method: options
+
+Outputs:
+  LeadApiBaseUrl:
+    Description: Set apiBaseUrl in src/environments/environment.production.ts to this value
+    Value: !Sub 'https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod'
+  LeadsTableName:
+    Description: DynamoDB table storing submitted leads
+    Value: !Ref LeadsTable

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { finalize } from 'rxjs';
-import { CORPORATE_EMAIL } from '../../data/site.constants';
+import { CORPORATE_EMAIL, CORPORATE_PHONE_GROUPS } from '../../data/site.constants';
 import { LeadApiService } from '../../services/lead-api.service';
 import { MATERIAL_OPTIONS } from '../../data/products.data';
 
@@ -19,6 +19,7 @@ export class ContactPageComponent implements OnInit {
   status: 'idle' | 'success' | 'error' = 'idle';
   materialOptions = MATERIAL_OPTIONS;
   readonly corporateEmail = CORPORATE_EMAIL;
+  readonly phoneGroups = CORPORATE_PHONE_GROUPS;
 
   inquiryForm = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(2)]],

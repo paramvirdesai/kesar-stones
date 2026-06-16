@@ -7,7 +7,7 @@
 }
 
 .navbar__brand {
-  @apply flex min-w-0 items-center gap-2 sm:gap-3;
+  @apply flex min-w-0 items-center gap-2.5 sm:gap-3;
 }
 
 .navbar__brand-text {
@@ -22,7 +22,9 @@
   @apply block truncate text-[9px] font-semibold uppercase tracking-[0.28em] text-[#4A443F] sm:text-[10px] sm:tracking-[0.32em];
 }
 
-.site-header--hero .navbar__tagline {
+.site-header--hero .navbar__tagline,
+.site-header--glass .navbar__tagline,
+.site-header--glass-solid .navbar__tagline {
   @apply text-[#4A443F];
 }
 

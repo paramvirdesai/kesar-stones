@@ -24,8 +24,25 @@
           </a>
         </div>
         <div class="contact-page__info-row">
+          <p class="corp-eyebrow">Mobile</p>
+          <div class="contact-page__phones">
+            @for (group of phoneGroups; track group.label) {
+              <div class="contact-page__phone-group">
+                <p class="contact-page__phone-label">{{ group.label }}</p>
+                <div class="contact-page__phone-list">
+                  @for (phone of group.phones; track phone.e164) {
+                    <a [href]="'tel:' + phone.e164">
+                      {{ phone.display }}
+                    </a>
+                  }
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+        <div class="contact-page__info-row">
           <p class="corp-eyebrow">Headquarters</p>
-          <p class="mt-2 text-patagonia-taupe">United States</p>
+          <p class="mt-2 text-patagonia-taupe">Houston, TX, USA</p>
         </div>
         <div class="contact-page__info-row">
           <p class="corp-eyebrow">Quarry Operations</p>

@@ -227,9 +227,9 @@ export const COLLECTION_ITEMS: CollectionItem[] = [
     }
   },
   {
-    id: 'visconsin-white',
+    id: 'viscon-white',
     category: 'granite',
-    name: 'Visconsin White',
+    name: 'Viscon White',
     thumbnail: collectionAsset('granite/visconsin white/viscon-white-thumbnail.jpg'),
     carousel: [
       collectionAsset('granite/visconsin white/viscon-white-carousel-1.jpg'),
@@ -237,7 +237,7 @@ export const COLLECTION_ITEMS: CollectionItem[] = [
     ],
     quarry: 'Rajasthan Granite Belt',
     editorial:
-      'Visconsin White is a bright, consistent white granite program for volume export — favored by distributors building container programs for North American and Middle East markets.',
+      'Viscon White is a bright, consistent white granite program for volume export — favored by distributors building container programs for North American and Middle East markets.',
     specs: {
       thicknessOptions: '18 mm · 20 mm · 30 mm',
       primaryBaseColor: 'Clean white with light grey crystals',
@@ -249,32 +249,20 @@ export const COLLECTION_ITEMS: CollectionItem[] = [
     id: 'patagonia-quartz',
     category: 'quartz',
     name: 'Patagonia Quartz',
-    thumbnail: collectionAsset('raw-patagonia-quartz.jpg'),
-    carousel: [collectionAsset('raw-patagonia-quartz.jpg'), collectionAsset('luxury-patagonia-wall.jpg')],
+    thumbnail: collectionAsset('patagonia-quartz.png'),
+    carousel: [
+      collectionAsset('wholesale inventory/patagonia-quartz-raw-slab.jpeg'),
+      collectionAsset('featured collection/raw-patagonia-quartz.jpg'),
+      collectionAsset('patagonia-comercial.png')
+    ],
     quarry: 'Engineered · Partner Facility',
     editorial:
       'Patagonia-inspired engineered quartz with dramatic movement for feature walls and backlit installations. Available for artificial slab export programs and mixed container loads.',
     specs: {
-      thicknessOptions: '12 mm · 20 mm · 30 mm',
-      primaryBaseColor: 'Warm white-grey with bold veining',
+      thicknessOptions: '20 mm · 30 mm',
+      primaryBaseColor: 'Translucent cream-ivory with amber-gold patches and charcoal-grey brecciation',
       materialComposition: 'Engineered quartz · resin-bound',
       qualityGrade: 'Commercial / Hospitality Grade'
-    }
-  },
-  {
-    id: 'engineered-white',
-    category: 'quartz',
-    name: 'Engineered White Series',
-    thumbnail: collectionAsset('raw-alaskan-white.jpg'),
-    carousel: [collectionAsset('raw-alaskan-white.jpg'), collectionAsset('luxury-alaska-kitchen.jpg')],
-    quarry: 'Engineered · Partner Facility',
-    editorial:
-      'High-volume engineered white quartz for developer and distributor programs — consistent slab sizing, calibrated thickness, and export-ready crating for global ports.',
-    specs: {
-      thicknessOptions: '12 mm · 20 mm · 30 mm',
-      primaryBaseColor: 'Pure white with optional fine grain',
-      materialComposition: 'Engineered quartz',
-      qualityGrade: 'Export Standard / B2B Volume'
     }
   }
 ];
