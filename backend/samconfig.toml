@@ -1,8 +1,3 @@
-# Copy to samconfig.toml and adjust, or run: sam deploy --guided
-#
-# After deploy, copy LeadApiBaseUrl from stack Outputs into:
-#   src/environments/environment.production.ts → apiBaseUrl
-
 version = 0.1
 
 [default.deploy.parameters]
@@ -10,5 +5,5 @@ stack_name = "iconic-stones-leads"
 resolve_s3 = true
 capabilities = "CAPABILITY_IAM"
 region = "us-east-1"
-confirm_changeset = true
+confirm_changeset = false
 parameter_overrides = "FromEmail=info@theiconicstones.com RecipientEmail=info@theiconicstones.com"

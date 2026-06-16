@@ -1,7 +1,7 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: Iconic Stones lead capture — free-tier serverless (Lambda + HTTP API + DynamoDB + SES)
-
+Description: "Iconic Stones lead capture \u2014 free-tier serverless (Lambda + HTTP\
+  \ API + DynamoDB + SES)"
 Parameters:
   FromEmail:
     Type: String
@@ -11,7 +11,6 @@ Parameters:
     Type: String
     Description: Inbox that receives lead notification emails
     Default: info@theiconicstones.com
-
 Globals:
   Function:
     Timeout: 10
@@ -20,13 +19,12 @@ Globals:
   HttpApi:
     CorsConfiguration:
       AllowMethods:
-        - POST
-        - OPTIONS
+      - POST
+      - OPTIONS
       AllowHeaders:
-        - Content-Type
+      - Content-Type
       AllowOrigins:
-        - "*"
-
+      - '*'
 Resources:
   LeadsTable:
     Type: AWS::DynamoDB::Table
@@ -34,32 +32,36 @@ Resources:
       TableName: marble-granite-leads
       BillingMode: PAY_PER_REQUEST
       AttributeDefinitions:
-        - AttributeName: leadId
-          AttributeType: S
+      - AttributeName: leadId
+        AttributeType: S
       KeySchema:
-        - AttributeName: leadId
-          KeyType: HASH
-
+      - AttributeName: leadId
+        KeyType: HASH
   LeadFunction:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: marble-granite-lead
       Handler: index.handler
-      CodeUri: lambda/lead/
+      CodeUri: LeadFunction
       Environment:
         Variables:
-          LEADS_TABLE: !Ref LeadsTable
-          FROM_EMAIL: !Ref FromEmail
-          RECIPIENT_EMAIL: !Ref RecipientEmail
+          LEADS_TABLE:
+            Ref: LeadsTable
+          FROM_EMAIL:
+            Ref: FromEmail
+          RECIPIENT_EMAIL:
+            Ref: RecipientEmail
       Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref LeadsTable
-        - Statement:
-            Effect: Allow
-            Action:
-              - ses:SendEmail
-              - ses:SendRawEmail
-            Resource: !Sub 'arn:aws:ses:${AWS::Region}:${AWS::AccountId}:identity/${FromEmail}'
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: LeadsTable
+      - Statement:
+          Effect: Allow
+          Action:
+          - ses:SendEmail
+          - ses:SendRawEmail
+          Resource:
+            Fn::Sub: arn:aws:ses:${AWS::Region}:${AWS::AccountId}:identity/${FromEmail}
       Events:
         LeadApi:
           Type: HttpApi
@@ -71,11 +73,15 @@ Resources:
           Properties:
             Path: /lead
             Method: OPTIONS
-
+    Metadata:
+      SamResourceId: LeadFunction
 Outputs:
   LeadApiBaseUrl:
-    Description: Set apiBaseUrl in src/environments/environment.production.ts to this value (no trailing slash)
-    Value: !Sub 'https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com'
+    Description: Set apiBaseUrl in src/environments/environment.production.ts to this
+      value (no trailing slash)
+    Value:
+      Fn::Sub: https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com
   LeadsTableName:
     Description: DynamoDB table storing submitted leads
-    Value: !Ref LeadsTable
+    Value:
+      Ref: LeadsTable
