@@ -252,19 +252,42 @@
       [revealDelay]="100"
       novalidate
     >
+      @if (formSubmitted && inquiryForm.invalid) {
+        <div class="form-summary form-summary--error mb-8" role="alert" aria-live="polite">
+          <p class="form-summary__title">
+            {{ invalidFieldCount() === 1 ? '1 field needs your attention' : invalidFieldCount() + ' fields need your attention' }}
+          </p>
+          <p class="form-summary__text">Please complete every field marked with * before submitting.</p>
+        </div>
+      }
+
       <div class="space-y-7 sm:space-y-8">
-        <div class="float-field-minimal">
+        <div
+          class="float-field-minimal"
+          [class.form-field--invalid]="fieldInvalid(inquiryForm.get('name'), formSubmitted)"
+        >
           <input
             id="home-name"
             class="peer float-input-minimal"
             formControlName="name"
             placeholder=" "
             autocomplete="name"
-            [class.form-invalid]="formSubmitted && inquiryForm.get('name')?.invalid"
+            [class.form-invalid]="fieldInvalid(inquiryForm.get('name'), formSubmitted)"
+            [attr.aria-invalid]="fieldInvalid(inquiryForm.get('name'), formSubmitted)"
+            [attr.aria-describedby]="fieldInvalid(inquiryForm.get('name'), formSubmitted) ? 'home-name-error' : null"
           />
           <label class="float-label-minimal" for="home-name">Full Name *</label>
+          @if (fieldError(inquiryForm.get('name'), 'Full name', formSubmitted); as err) {
+            <p class="form-field-error" id="home-name-error" role="alert">
+              <span class="form-field-error__icon" aria-hidden="true">!</span>
+              {{ err }}
+            </p>
+          }
         </div>
-        <div class="float-field-minimal">
+        <div
+          class="float-field-minimal"
+          [class.form-field--invalid]="fieldInvalid(inquiryForm.get('email'), formSubmitted)"
+        >
           <input
             id="home-email"
             type="email"
@@ -272,44 +295,82 @@
             formControlName="email"
             placeholder=" "
             autocomplete="email"
-            [class.form-invalid]="formSubmitted && inquiryForm.get('email')?.invalid"
+            [class.form-invalid]="fieldInvalid(inquiryForm.get('email'), formSubmitted)"
+            [attr.aria-invalid]="fieldInvalid(inquiryForm.get('email'), formSubmitted)"
+            [attr.aria-describedby]="fieldInvalid(inquiryForm.get('email'), formSubmitted) ? 'home-email-error' : null"
           />
           <label class="float-label-minimal" for="home-email">Business Email *</label>
+          @if (fieldError(inquiryForm.get('email'), 'Business email', formSubmitted); as err) {
+            <p class="form-field-error" id="home-email-error" role="alert">
+              <span class="form-field-error__icon" aria-hidden="true">!</span>
+              {{ err }}
+            </p>
+          }
         </div>
-        <div class="float-field-minimal">
+        <div
+          class="float-field-minimal"
+          [class.form-field--invalid]="fieldInvalid(inquiryForm.get('destinationPort'), formSubmitted)"
+        >
           <input
             id="home-port"
             class="peer float-input-minimal"
             formControlName="destinationPort"
             placeholder=" "
-            [class.form-invalid]="formSubmitted && inquiryForm.get('destinationPort')?.invalid"
+            [class.form-invalid]="fieldInvalid(inquiryForm.get('destinationPort'), formSubmitted)"
+            [attr.aria-invalid]="fieldInvalid(inquiryForm.get('destinationPort'), formSubmitted)"
+            [attr.aria-describedby]="fieldInvalid(inquiryForm.get('destinationPort'), formSubmitted) ? 'home-port-error' : null"
           />
           <label class="float-label-minimal" for="home-port">Destination Port *</label>
+          @if (fieldError(inquiryForm.get('destinationPort'), 'Destination port', formSubmitted); as err) {
+            <p class="form-field-error" id="home-port-error" role="alert">
+              <span class="form-field-error__icon" aria-hidden="true">!</span>
+              {{ err }}
+            </p>
+          }
         </div>
-        <div>
+        <div [class.form-field--invalid]="fieldInvalid(inquiryForm.get('materialInterest'), formSubmitted)">
           <label class="sr-only" for="home-material">Material Interest</label>
           <select
             id="home-material"
             class="float-select-minimal"
             formControlName="materialInterest"
-            [class.form-invalid]="formSubmitted && inquiryForm.get('materialInterest')?.invalid"
+            [class.form-invalid]="fieldInvalid(inquiryForm.get('materialInterest'), formSubmitted)"
+            [attr.aria-invalid]="fieldInvalid(inquiryForm.get('materialInterest'), formSubmitted)"
+            [attr.aria-describedby]="fieldInvalid(inquiryForm.get('materialInterest'), formSubmitted) ? 'home-material-error' : null"
           >
             <option value="">Select material *</option>
             @for (opt of materialOptions; track opt) {
               <option [value]="opt">{{ opt }}</option>
             }
           </select>
+          @if (fieldError(inquiryForm.get('materialInterest'), 'Material interest', formSubmitted); as err) {
+            <p class="form-field-error" id="home-material-error" role="alert">
+              <span class="form-field-error__icon" aria-hidden="true">!</span>
+              {{ err }}
+            </p>
+          }
         </div>
-        <div class="float-field-minimal">
+        <div
+          class="float-field-minimal"
+          [class.form-field--invalid]="fieldInvalid(inquiryForm.get('message'), formSubmitted)"
+        >
           <textarea
             id="home-message"
             class="peer float-input-minimal min-h-[120px] resize-none"
             rows="4"
             formControlName="message"
             placeholder=" "
-            [class.form-invalid]="formSubmitted && inquiryForm.get('message')?.invalid"
+            [class.form-invalid]="fieldInvalid(inquiryForm.get('message'), formSubmitted)"
+            [attr.aria-invalid]="fieldInvalid(inquiryForm.get('message'), formSubmitted)"
+            [attr.aria-describedby]="fieldInvalid(inquiryForm.get('message'), formSubmitted) ? 'home-message-error' : null"
           ></textarea>
           <label class="float-label-minimal" for="home-message">Project Details *</label>
+          @if (fieldError(inquiryForm.get('message'), 'Project details', formSubmitted); as err) {
+            <p class="form-field-error" id="home-message-error" role="alert">
+              <span class="form-field-error__icon" aria-hidden="true">!</span>
+              {{ err }}
+            </p>
+          }
         </div>
       </div>
 
@@ -322,16 +383,13 @@
         <a routerLink="/contact" class="link-editorial ml-1">Go to export desk →</a>
       </p>
 
-      @if (formSubmitted && inquiryForm.invalid) {
-        <p class="home-inquiry__message home-inquiry__message--error" role="alert">Please complete all required fields.</p>
-      }
       @if (formStatus === 'success') {
-        <p class="home-inquiry__message home-inquiry__message--success" role="status">
+        <p class="form-message form-message--success home-inquiry__message" role="status">
           Inquiry received. Our export desk will contact you shortly.
         </p>
       }
       @if (formStatus === 'error') {
-        <p class="home-inquiry__message home-inquiry__message--error" role="alert">
+        <p class="form-message form-message--invalid home-inquiry__message" role="alert">
           Submission failed. Email
           <a href="mailto:info@theiconicstones.com" class="underline">info&#64;theiconicstones.com</a>
           directly.

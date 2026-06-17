@@ -94,30 +94,48 @@
                 <a [href]="'mailto:' + corporateEmail" class="link-editorial">{{ corporateEmail }}</a>.
               </p>
               <form [formGroup]="inquiryForm" (ngSubmit)="submitInquiry()" novalidate>
+                @if (formSubmitted && inquiryForm.invalid) {
+                  <div class="form-summary form-summary--error mb-6" role="alert" aria-live="polite">
+                    <p class="form-summary__title">
+                      {{ invalidFieldCount() === 1 ? '1 field needs your attention' : invalidFieldCount() + ' fields need your attention' }}
+                    </p>
+                    <p class="form-summary__text">Please complete every field marked with * before submitting.</p>
+                  </div>
+                }
+
                 <div class="space-y-6">
-                  <div class="float-field-minimal">
-                    <input id="item-name" class="peer float-input-minimal" formControlName="name" placeholder=" " autocomplete="name" [class.form-invalid]="formSubmitted && inquiryForm.get('name')?.invalid" />
+                  <div class="float-field-minimal" [class.form-field--invalid]="fieldInvalid(inquiryForm.get('name'), formSubmitted)">
+                    <input id="item-name" class="peer float-input-minimal" formControlName="name" placeholder=" " autocomplete="name" [class.form-invalid]="fieldInvalid(inquiryForm.get('name'), formSubmitted)" [attr.aria-invalid]="fieldInvalid(inquiryForm.get('name'), formSubmitted)" [attr.aria-describedby]="fieldInvalid(inquiryForm.get('name'), formSubmitted) ? 'item-name-error' : null" />
                     <label class="float-label-minimal" for="item-name">Full Name *</label>
+                    @if (fieldError(inquiryForm.get('name'), 'Full name', formSubmitted); as err) {
+                      <p class="form-field-error" id="item-name-error" role="alert"><span class="form-field-error__icon" aria-hidden="true">!</span>{{ err }}</p>
+                    }
                   </div>
-                  <div class="float-field-minimal">
-                    <input id="item-email" type="email" class="peer float-input-minimal" formControlName="email" placeholder=" " autocomplete="email" [class.form-invalid]="formSubmitted && inquiryForm.get('email')?.invalid" />
+                  <div class="float-field-minimal" [class.form-field--invalid]="fieldInvalid(inquiryForm.get('email'), formSubmitted)">
+                    <input id="item-email" type="email" class="peer float-input-minimal" formControlName="email" placeholder=" " autocomplete="email" [class.form-invalid]="fieldInvalid(inquiryForm.get('email'), formSubmitted)" [attr.aria-invalid]="fieldInvalid(inquiryForm.get('email'), formSubmitted)" [attr.aria-describedby]="fieldInvalid(inquiryForm.get('email'), formSubmitted) ? 'item-email-error' : null" />
                     <label class="float-label-minimal" for="item-email">Business Email *</label>
+                    @if (fieldError(inquiryForm.get('email'), 'Business email', formSubmitted); as err) {
+                      <p class="form-field-error" id="item-email-error" role="alert"><span class="form-field-error__icon" aria-hidden="true">!</span>{{ err }}</p>
+                    }
                   </div>
-                  <div class="float-field-minimal">
-                    <input id="item-company" class="peer float-input-minimal" formControlName="company" placeholder=" " autocomplete="organization" [class.form-invalid]="formSubmitted && inquiryForm.get('company')?.invalid" />
+                  <div class="float-field-minimal" [class.form-field--invalid]="fieldInvalid(inquiryForm.get('company'), formSubmitted)">
+                    <input id="item-company" class="peer float-input-minimal" formControlName="company" placeholder=" " autocomplete="organization" [class.form-invalid]="fieldInvalid(inquiryForm.get('company'), formSubmitted)" [attr.aria-invalid]="fieldInvalid(inquiryForm.get('company'), formSubmitted)" [attr.aria-describedby]="fieldInvalid(inquiryForm.get('company'), formSubmitted) ? 'item-company-error' : null" />
                     <label class="float-label-minimal" for="item-company">Company *</label>
+                    @if (fieldError(inquiryForm.get('company'), 'Company', formSubmitted); as err) {
+                      <p class="form-field-error" id="item-company-error" role="alert"><span class="form-field-error__icon" aria-hidden="true">!</span>{{ err }}</p>
+                    }
                   </div>
-                  <div class="float-field-minimal">
-                    <textarea id="item-message" class="peer float-input-minimal min-h-[120px] resize-none" rows="4" formControlName="message" placeholder=" " [class.form-invalid]="formSubmitted && inquiryForm.get('message')?.invalid"></textarea>
+                  <div class="float-field-minimal" [class.form-field--invalid]="fieldInvalid(inquiryForm.get('message'), formSubmitted)">
+                    <textarea id="item-message" class="peer float-input-minimal min-h-[120px] resize-none" rows="4" formControlName="message" placeholder=" " [class.form-invalid]="fieldInvalid(inquiryForm.get('message'), formSubmitted)" [attr.aria-invalid]="fieldInvalid(inquiryForm.get('message'), formSubmitted)" [attr.aria-describedby]="fieldInvalid(inquiryForm.get('message'), formSubmitted) ? 'item-message-error' : null"></textarea>
                     <label class="float-label-minimal" for="item-message">Project Details *</label>
+                    @if (fieldError(inquiryForm.get('message'), 'Project details', formSubmitted); as err) {
+                      <p class="form-field-error" id="item-message-error" role="alert"><span class="form-field-error__icon" aria-hidden="true">!</span>{{ err }}</p>
+                    }
                   </div>
                 </div>
                 <button type="submit" class="btn-cta-copper mt-8 w-full" [disabled]="formLoading">
                   {{ formLoading ? 'Submitting…' : 'Submit Product Inquiry' }}
                 </button>
-                @if (formSubmitted && inquiryForm.invalid) {
-                  <p class="form-message form-message--invalid" role="alert">Please complete all required fields.</p>
-                }
                 @if (formStatus === 'success') {
                   <p class="form-message form-message--success" role="status">Inquiry received. Our export desk will respond shortly.</p>
                 }

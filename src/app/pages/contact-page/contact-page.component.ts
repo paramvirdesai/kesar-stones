@@ -5,6 +5,12 @@ import { finalize } from 'rxjs';
 import { CORPORATE_EMAIL, CORPORATE_PHONE_GROUPS } from '../../data/site.constants';
 import { LeadApiService } from '../../services/lead-api.service';
 import { MATERIAL_OPTIONS } from '../../data/products.data';
+import {
+  fieldInvalid,
+  focusFirstFormError,
+  getFieldErrorMessage,
+  invalidFieldCount
+} from '../../utils/form-validation';
 
 @Component({
   selector: 'app-contact-page',
@@ -49,10 +55,21 @@ export class ContactPageComponent implements OnInit {
     }
   }
 
+  readonly fieldInvalid = fieldInvalid;
+  readonly fieldError = getFieldErrorMessage;
+
+  invalidFieldCount(): number {
+    return invalidFieldCount(this.inquiryForm, this.submitted);
+  }
+
   send(): void {
     this.submitted = true;
     this.status = 'idle';
-    if (this.inquiryForm.invalid) return;
+    if (this.inquiryForm.invalid) {
+      this.inquiryForm.markAllAsTouched();
+      focusFirstFormError();
+      return;
+    }
 
     this.loading = true;
     this.leadApi

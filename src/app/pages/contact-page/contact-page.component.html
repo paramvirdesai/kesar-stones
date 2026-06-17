@@ -55,41 +55,72 @@
       </div>
     </aside>
 
-    <form class="editorial-card contact-page__form" [formGroup]="inquiryForm" (ngSubmit)="send()">
+    <form class="editorial-card contact-page__form" [formGroup]="inquiryForm" (ngSubmit)="send()" novalidate>
       <h2 class="contact-page__form-title">B2B inquiry form</h2>
+
+      @if (submitted && inquiryForm.invalid) {
+        <div class="form-summary form-summary--error mt-6" role="alert" aria-live="polite">
+          <p class="form-summary__title">
+            {{ invalidFieldCount() === 1 ? '1 field needs your attention' : invalidFieldCount() + ' fields need your attention' }}
+          </p>
+          <p class="form-summary__text">Please complete every field marked with * before submitting.</p>
+        </div>
+      }
+
       <div class="contact-page__fields">
-        <div class="float-field">
-          <input id="name" class="peer float-input" formControlName="name" placeholder=" " autocomplete="name" />
+        <div class="float-field" [class.form-field--invalid]="fieldInvalid(inquiryForm.get('name'), submitted)">
+          <input id="name" class="peer float-input" formControlName="name" placeholder=" " autocomplete="name" [class.form-invalid]="fieldInvalid(inquiryForm.get('name'), submitted)" [attr.aria-invalid]="fieldInvalid(inquiryForm.get('name'), submitted)" [attr.aria-describedby]="fieldInvalid(inquiryForm.get('name'), submitted) ? 'contact-name-error' : null" />
           <label class="float-label" for="name">Full Name *</label>
+          @if (fieldError(inquiryForm.get('name'), 'Full name', submitted); as err) {
+            <p class="form-field-error" id="contact-name-error" role="alert"><span class="form-field-error__icon" aria-hidden="true">!</span>{{ err }}</p>
+          }
         </div>
-        <div class="float-field">
-          <input id="company" class="peer float-input" formControlName="company" placeholder=" " autocomplete="organization" />
+        <div class="float-field" [class.form-field--invalid]="fieldInvalid(inquiryForm.get('company'), submitted)">
+          <input id="company" class="peer float-input" formControlName="company" placeholder=" " autocomplete="organization" [class.form-invalid]="fieldInvalid(inquiryForm.get('company'), submitted)" [attr.aria-invalid]="fieldInvalid(inquiryForm.get('company'), submitted)" [attr.aria-describedby]="fieldInvalid(inquiryForm.get('company'), submitted) ? 'contact-company-error' : null" />
           <label class="float-label" for="company">Company Name *</label>
+          @if (fieldError(inquiryForm.get('company'), 'Company name', submitted); as err) {
+            <p class="form-field-error" id="contact-company-error" role="alert"><span class="form-field-error__icon" aria-hidden="true">!</span>{{ err }}</p>
+          }
         </div>
-        <div class="float-field contact-page__field-full">
-          <input id="email" type="email" class="peer float-input" formControlName="email" placeholder=" " autocomplete="email" />
+        <div class="float-field contact-page__field-full" [class.form-field--invalid]="fieldInvalid(inquiryForm.get('email'), submitted)">
+          <input id="email" type="email" class="peer float-input" formControlName="email" placeholder=" " autocomplete="email" [class.form-invalid]="fieldInvalid(inquiryForm.get('email'), submitted)" [attr.aria-invalid]="fieldInvalid(inquiryForm.get('email'), submitted)" [attr.aria-describedby]="fieldInvalid(inquiryForm.get('email'), submitted) ? 'contact-email-error' : null" />
           <label class="float-label" for="email">Business Email *</label>
+          @if (fieldError(inquiryForm.get('email'), 'Business email', submitted); as err) {
+            <p class="form-field-error" id="contact-email-error" role="alert"><span class="form-field-error__icon" aria-hidden="true">!</span>{{ err }}</p>
+          }
         </div>
-        <div class="float-field">
-          <input id="destinationPort" class="peer float-input" formControlName="destinationPort" placeholder=" " />
+        <div class="float-field" [class.form-field--invalid]="fieldInvalid(inquiryForm.get('destinationPort'), submitted)">
+          <input id="destinationPort" class="peer float-input" formControlName="destinationPort" placeholder=" " [class.form-invalid]="fieldInvalid(inquiryForm.get('destinationPort'), submitted)" [attr.aria-invalid]="fieldInvalid(inquiryForm.get('destinationPort'), submitted)" [attr.aria-describedby]="fieldInvalid(inquiryForm.get('destinationPort'), submitted) ? 'contact-port-error' : null" />
           <label class="float-label" for="destinationPort">Destination Port *</label>
+          @if (fieldError(inquiryForm.get('destinationPort'), 'Destination port', submitted); as err) {
+            <p class="form-field-error" id="contact-port-error" role="alert"><span class="form-field-error__icon" aria-hidden="true">!</span>{{ err }}</p>
+          }
         </div>
-        <div>
+        <div [class.form-field--invalid]="fieldInvalid(inquiryForm.get('materialInterest'), submitted)">
           <label class="sr-only" for="materialInterest">Material Interest</label>
-          <select id="materialInterest" class="float-select" formControlName="materialInterest">
+          <select id="materialInterest" class="float-select" formControlName="materialInterest" [class.form-invalid]="fieldInvalid(inquiryForm.get('materialInterest'), submitted)" [attr.aria-invalid]="fieldInvalid(inquiryForm.get('materialInterest'), submitted)" [attr.aria-describedby]="fieldInvalid(inquiryForm.get('materialInterest'), submitted) ? 'contact-material-error' : null">
             <option value="">Select material *</option>
             @for (opt of materialOptions; track opt) {
               <option [value]="opt">{{ opt }}</option>
             }
           </select>
+          @if (fieldError(inquiryForm.get('materialInterest'), 'Material interest', submitted); as err) {
+            <p class="form-field-error" id="contact-material-error" role="alert"><span class="form-field-error__icon" aria-hidden="true">!</span>{{ err }}</p>
+          }
         </div>
-        <div class="float-field contact-page__field-full">
-          <input id="volume" class="peer float-input" formControlName="volume" placeholder=" " />
+        <div class="float-field" [class.form-field--invalid]="fieldInvalid(inquiryForm.get('volume'), submitted)">
+          <input id="volume" class="peer float-input" formControlName="volume" placeholder=" " [class.form-invalid]="fieldInvalid(inquiryForm.get('volume'), submitted)" [attr.aria-invalid]="fieldInvalid(inquiryForm.get('volume'), submitted)" [attr.aria-describedby]="fieldInvalid(inquiryForm.get('volume'), submitted) ? 'contact-volume-error' : null" />
           <label class="float-label" for="volume">Estimated Volume / Container Load *</label>
+          @if (fieldError(inquiryForm.get('volume'), 'Estimated volume', submitted); as err) {
+            <p class="form-field-error" id="contact-volume-error" role="alert"><span class="form-field-error__icon" aria-hidden="true">!</span>{{ err }}</p>
+          }
         </div>
-        <div class="float-field contact-page__field-full">
-          <textarea id="message" class="peer float-input contact-page__textarea" rows="5" formControlName="message" placeholder=" "></textarea>
+        <div class="float-field contact-page__field-full" [class.form-field--invalid]="fieldInvalid(inquiryForm.get('message'), submitted)">
+          <textarea id="message" class="peer float-input contact-page__textarea" rows="5" formControlName="message" placeholder=" " [class.form-invalid]="fieldInvalid(inquiryForm.get('message'), submitted)" [attr.aria-invalid]="fieldInvalid(inquiryForm.get('message'), submitted)" [attr.aria-describedby]="fieldInvalid(inquiryForm.get('message'), submitted) ? 'contact-message-error' : null"></textarea>
           <label class="float-label" for="message">Project Details &amp; Requirements *</label>
+          @if (fieldError(inquiryForm.get('message'), 'Project details', submitted); as err) {
+            <p class="form-field-error" id="contact-message-error" role="alert"><span class="form-field-error__icon" aria-hidden="true">!</span>{{ err }}</p>
+          }
         </div>
       </div>
 
@@ -97,18 +128,13 @@
         {{ loading ? 'Submitting Inquiry...' : 'Submit B2B Inquiry' }}
       </button>
 
-      @if (submitted && inquiryForm.invalid) {
-        <p class="contact-page__message contact-page__message--error">
-          Please complete all required fields with valid business information.
-        </p>
-      }
       @if (status === 'success') {
-        <p class="contact-page__message contact-page__message--success">
+        <p class="form-message form-message--success contact-page__message" role="status">
           Inquiry received. Our export desk will contact you shortly.
         </p>
       }
       @if (status === 'error') {
-        <p class="contact-page__message contact-page__message--error">
+        <p class="form-message form-message--invalid contact-page__message" role="alert">
           Submission failed. Email {{ corporateEmail }} or retry shortly.
         </p>
       }

@@ -17,6 +17,12 @@ import {
 import { MATERIAL_OPTIONS } from '../../data/products.data';
 import { COLLECTION_ITEMS } from '../../data/collections.catalog';
 import { LeadApiService } from '../../services/lead-api.service';
+import {
+  fieldInvalid,
+  focusFirstFormError,
+  getFieldErrorMessage,
+  invalidFieldCount
+} from '../../utils/form-validation';
 
 export interface WholesaleTickerItem {
   id: string;
@@ -269,10 +275,21 @@ export class HomePageComponent {
     this.activeWorkflowStep = step;
   }
 
+  readonly fieldInvalid = fieldInvalid;
+  readonly fieldError = getFieldErrorMessage;
+
+  invalidFieldCount(): number {
+    return invalidFieldCount(this.inquiryForm, this.formSubmitted);
+  }
+
   submitInquiry(): void {
     this.formSubmitted = true;
     this.formStatus = 'idle';
-    if (this.inquiryForm.invalid) return;
+    if (this.inquiryForm.invalid) {
+      this.inquiryForm.markAllAsTouched();
+      focusFirstFormError();
+      return;
+    }
 
     this.formLoading = true;
     const v = this.inquiryForm.getRawValue();

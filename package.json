@@ -9,7 +9,11 @@
     "watch": "ng build --watch --configuration development",
     "backend:install": "npm install --prefix backend/lambda/lead",
     "backend:build": "cd backend && sam build",
-    "backend:deploy": "cd backend && sam build && sam deploy"
+    "backend:deploy": "cd backend && sam build && sam deploy",
+    "hosting:deploy": "aws cloudformation deploy --template-file hosting/template.yaml --stack-name iconic-stones-site --region us-east-1 --capabilities CAPABILITY_IAM --no-fail-on-empty-changeset --parameter-overrides SiteDomainName=www.theiconicstones.com ApexDomainName=theiconicstones.com AcmCertificateArn=arn:aws:acm:us-east-1:019847571143:certificate/c70ea148-e72c-4d68-a895-7b8fa8a92680",
+    "domain:setup": "bash scripts/setup-custom-domain.sh",
+    "site:deploy": "bash scripts/deploy-site.sh",
+    "production:deploy": "npm run hosting:deploy && npm run site:deploy"
   },
   "keywords": [
     "angular",

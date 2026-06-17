@@ -1,0 +1,8 @@
+version = 0.1
+
+[default.deploy.parameters]
+stack_name = "iconic-stones-site"
+resolve_s3 = false
+capabilities = "CAPABILITY_IAM"
+region = "us-east-1"
+confirm_changeset = false
